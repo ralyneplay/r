@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <title>Ralyne Play</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #bfe4ff;
+      overflow-x: hidden;
+    }
+
+    /* ================= SUN MENU ================= */
+
+    .sun-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: #ffd966;
+      border-bottom-left-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 999;
+      transition: 0.4s;
+      overflow: hidden;
+    }
+
+    @keyframes rotateSun {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* 🌙 MODE BULAN */
+    .sun-menu.active {
+      background: #f5f1e6;
+    }
+
+    .sun-menu.active::before {
+      opacity: 0;
+    }
+
+    .sun-menu.active::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #e8e2d3;
+      border-radius: 50%;
+      top: 20px;
+      right: 20px;
+      box-shadow: -25px 0 0 0 #f5f1e6;
+      z-index: 1;
+    }
+
+    /* TEXT */
+    .sun-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+      font-weight: 700;
+      color: #2b6cb0;
+      transform: rotate(-20deg);
+      transition: 0.3s;
+      font-size: 20px;
+      z-index: 2;
+    }
+
+    .sun-text span {
+      display: block;
+    }
+
+    /* ================= MENU FULL SCREEN ================= */
+
+    .menu-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      z-index: 998;
+    }
+
+    /* 🌌 NIGHT MODE */
+    .menu-panel.active {
+      right: 0;
+      background: radial-gradient(circle at top, #1a1a2e, #0f172a);
+      overflow: hidden;
+    }
+
+    /* MENU WARNA KUNING */
+    .menu-panel.active a {
+      color: #ffd966;
+    }
+
+    .menu-panel a {
+      font-size: 32px;
+      margin: 15px 0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .menu-panel a:hover {
+      transform: scale(1.1);
+    }
+
+    /* ================= STARS ================= */
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.3; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 10%;
+      min-height: 100vh;
+    }
+
+    .hero-text {
+      color: white;
+    }
+
+    .hero-text h1 {
+      font-size: 60px;
+      font-weight: 700;
+    }
+
+    .hero-text p {
+      margin-top: 10px;
+      font-size: 20px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 12px 28px;
+      background: #2b6cb0;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #1a4f85;
+    }
+
+    /* HERO VIDEO */
+    .hero-img {
+      position: relative;
+      width: 380px;
+      height: 500px;
+    }
+
+    .blob {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
+      animation: blobAnim 8s ease-in-out infinite;
+    }
+
+    .blob video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .shape-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #dff3ff;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
+      animation: blobAnim 8s ease-in-out infinite;
+    }
+
+    .shape-outline {
+      position: absolute;
+      width: 105%;
+      height: 105%;
+      top: -10px;
+      left: -10px;
+      z-index: 3;
+      pointer-events: none;
+      border: 3px dashed #ffd966;
+      border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
+      animation: blobAnim 8s ease-in-out infinite;
+    }
+
+    @keyframes blobAnim {
+      0% { border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%; }
+      50% { border-radius: 60% 40% 45% 55% / 55% 60% 40% 45%; }
+      100% { border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%; }
+    }
+
+    /* BUBBLES */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .bubble1 { width: 90px; height: 90px; background: #ffd966; top: 120px; left: 8%; }
+    .bubble2 { width: 40px; height: 40px; background: white; top: 250px; left: 35%; animation-delay: 1s; }
+    .bubble3 { width: 60px; height: 60px; background: #2b6cb0; bottom: 120px; right: 18%; animation-delay: 2s; }
+    .bubble4 { width: 35px; height: 35px; background: white; bottom: 200px; left: 25%; animation-delay: 1.5s; }
+    .bubble5 { width: 50px; height: 50px; background: #ffd966; top: 180px; right: 12%; animation-delay: 2.5s; }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* DIVIDER */
+    .divider {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      margin-top: -80px;
+      z-index: 5;
+    }
+
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 120px;
+      background: #7ecb89;
+      border-top-left-radius: 50% 60%;
+      border-top-right-radius: 50% 60%;
+    }
+
+    .tree {
+      position: absolute;
+      bottom: 60px;
+      width: 20px;
+      height: 60px;
+      background: #8b5a2b;
+    }
+
+    .tree::before {
+      content: "";
+      position: absolute;
+      bottom: 40px;
+      left: -20px;
+      width: 60px;
+      height: 60px;
+      background: #2f855a;
+      border-radius: 50%;
+    }
+
+    .tree1 { left: 15%; }
+    .tree2 { left: 45%; transform: scale(1.2); }
+    .tree3 { right: 15%; }
+
+    /* SECTION */
+    .section1 {
+      background: #f4fff7;
+      padding: 100px 10%;
+      text-align: center;
+    }
+
+    .section1 h2 {
+      font-size: 40px;
+      color: #2b6cb0;
+    }
+
+    .section1 p {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #444;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-img {
+        width: 260px;
+        height: 340px;
+        margin-top: 30px;
+      }
+
+      .hero-text h1 {
+        font-size: 42px;
+      }
+    }
+
+/* ================= BIO SECTION ================= */
+
+.bio-section {
+  background: #83ca8b;
+  padding: 80px 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.bio-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* KIRI */
+.bio-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.bio-photo-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/* FRAME KAYU (GLOBAL) */
+.wood-frame {
+  background: #8b5a2b;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.wood-frame::before {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 40px;
+  background: #8b5a2b;
+}
+
+.wood-frame img {
+  width: 180px;
+  display: block;
+  border-radius: 4px;
+}
+
+/* VERSI KECIL (BIAR SAMA TAPI LEBIH MINI) */
+.wood-frame.small {
+  transform: scale(0.85);
+}
+
+.wood-frame.small img {
+  width: 160px;
+}
+
+/* ================= FOTO TAMBAHAN ================= */
+
+.extra-photo {
+  position: absolute;
+  z-index: 1;
+  animation: floatPhoto 4s ease-in-out infinite;
+}
+
+/* kiri */
+.extra1 {
+  top: -60px;
+  left: -155px;
+  --rot: -12deg;
+}
+
+/* kanan */
+.extra2 {
+  bottom: -60px;
+  right: -155px;
+  --rot: 12deg;
+  animation-delay: 1s;
+}
+
+/* animasi */
+@keyframes floatPhoto {
+  0% {
+    transform: translateY(0px) rotate(var(--rot));
+  }
+  50% {
+    transform: translateY(-18px) rotate(var(--rot));
+  }
+  100% {
+    transform: translateY(0px) rotate(var(--rot));
+  }
+}
+
+/* ================= SUNGAI ================= */
+
+.bio-river {
+  flex: 1;
+  height: 300px;
+  background: linear-gradient(180deg, #4fc3f7, #0288d1);
+  border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+  position: relative;
+}
+
+.bio-river::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.3),
+    rgba(255,255,255,0.3) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  border-radius: inherit;
+}
+
+/* ================= KANAN ================= */
+
+.bio-right {
+  flex: 1;
+  color: #1a365d;
+}
+
+.bio-right h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.bio-card {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.bio-card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .bio-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bio-river {
+    width: 100%;
+    height: 200px;
+  }
+
+  .wood-frame img {
+    width: 150px;
+  }
+
+  .wood-frame.small img {
+    width: 110px;
+  }
+
+  .extra1 {
+    left: -100px;
+    top: -50px;
+  }
+
+  .extra2 {
+    right: -100px;
+    bottom: -50px;
+  }
+}
+
+.calendar-section {
+  background: #83ca8b;
+  padding: 100px 10%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-section h2 {
+  color: #1a365d;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+#monthYear {
+  color: #1a365d; /* bebas mau ganti warna apa */
+  font-weight: 700;
+}
+
+.calendar-header button {
+  background: #ffd966;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.today-btn {
+  margin-bottom: 20px;
+  background: #2b6cb0;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* kalender */
+.calendar-box {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.day-name {
+  font-weight: bold;
+  color: #1a365d;
+}
+
+/* kotak tanggal */
+.day {
+  background: #ffd966;
+  padding: 15px 5px;
+  border-radius: 12px;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.day:hover {
+  transform: scale(1.05);
+}
+
+/* hari ini */
+.today {
+  border: 3px solid #2b6cb0;
+}
+
+/* event */
+.event {
+  margin-top: 5px;
+  font-size: 10px;
+  background: #ff6b6b;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+/* kosong */
+.empty {
+  background: transparent;
+  pointer-events: none;
+}
+
+/* ================= POPUP ================= */
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 9999;
+}
+
+.popup.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup-content {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  width: 300px;
+  text-align: center;
+  position: relative;
+  animation: popupAnim 0.3s ease;
+}
+
+.popup-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+@keyframes popupAnim {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.message-section {
+  background: #83ca8b;
+  padding: 100px 10%;
+  text-align: center;
+}
+
+.message-form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message-form input,
+.message-form textarea {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+}
+
+.message-form button {
+  background: #2b6cb0;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.message-list {
+  margin-top: 40px;
+  display: grid;
+  gap: 15px;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.message-card {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.message-card small {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.message-form-box {
+  background: #ffd966;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 450px;
+  margin: 0 auto 40px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.message-form-box h3 {
+  color: #1a365d;
+  margin-bottom: 15px;
+}
+
+.message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.message-form label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a365d;
+}
+
+.message-form input,
+.message-form textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.message-form textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+.message-form button {
+  margin-top: 10px;
+  background: #2b6cb0;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.message-form button:hover {
+  background: #1a4f85;
+}
+
+/* STATUS TEXT */
+.status-text {
+  font-size: 13px;
+  color: #1a365d;
+  margin-top: 5px;
+}
+
+.message-section {
+  background: #83ca8b;
+  padding: 100px 10%;
+  text-align: center;
+}
+
+.message-form-box {
+  background: #ffd966;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 450px;
+  margin: 0 auto 40px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.message-form-box h3 {
+  color: #1a365d;
+  margin-bottom: 15px;
+}
+
+.message-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.message-form label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a365d;
+}
+
+.message-form input,
+.message-form textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+}
+
+.message-form textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+.message-form button {
+  margin-top: 10px;
+  background: #2b6cb0;
+  color: white;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.status-text {
+  font-size: 13px;
+  color: #1a365d;
+}
+
+.message-list {
+  margin-top: 40px;
+  display: grid;
+  gap: 15px;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.message-card {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: left;
+  animation: fadeIn 0.4s ease;
+}
+
+.message-card small {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SECTION HIJAU */
+.message-section {
+  background: #83ca8b;
+  padding: 100px 10%;
+  text-align: center;
+}
+
+/* SWIPER */
+.swiper {
+  max-width: 600px;
+  margin: 40px auto 0;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* CARD PESAN */
+.message-card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: left;
+
+  /* 🔥 TAMBAHAN PENTING */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.message-card h4 {
+  color: #2b6cb0;
+}
+
+.message-card small {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+/* DOTS */
+.swiper-pagination-bullet {
+  background: #2b6cb0;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.swiper {
+  padding: 10px;
+}
+
+.swiper-pagination {
+  position: relative;
+  margin-top: 20px; /* ⬅️ ini yang bikin turun */
+}
+
+.search-box {
+  max-width: 400px;
+  margin: 20px auto 40px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* BIAR PAGINATION TURUN */
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 20px;
+}
+
+/* JARAK SWIPER */
+.swiper {
+  max-width: 600px;
+  margin: 80px auto 0;
+}
+
+.status-text {
+  font-size: 13px;
+  color: #1a365d;
+  transition: 0.3s;
+}
+
+.status-text.error {
+  color: red;
+  font-weight: bold;
+}
+
+.status-text.success {
+  color: green;
+}
+
+.footer {
+  background: #ffd966;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #1a365d;
+  opacity: 0.9;
+}
+
+.calendar-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* GAMBAR FULL */
+.calendar-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* BIAR TEKS DI ATAS GAMBAR */
+.calendar-section > *:not(.calendar-bg-img) {
+  position: relative;
+  z-index: 2;
+}
+
+/* base (sama kayak sebelumnya) */
+.calendar-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 1;
+
+  animation: floatBg 6s ease-in-out infinite;
+}
+
+/* default: desktop tampil */
+.mobile-img {
+  display: none;
+}
+
+/* MOBILE MODE */
+@media (max-width: 768px) {
+  .desktop-img {
+    display: none;
+  }
+
+  .mobile-img {
+    display: block;
+  }
+}
+
+/* konten tetap di atas */
+.calendar-section > *:not(.calendar-bg-img) {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes floatBg {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+/* BUTTON BULAT */
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #2b6cb0;
+  color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* CHAT BOX */
+.chat-widget {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  height: 420px;
+  background: #e6f3ff;
+  border-radius: 20px;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* HEADER */
+.chat-header {
+  background: #2b6cb0;
+  color: white;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+/* BODY */
+.chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* BUBBLE */
+.chat {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* AI */
+.chat.ai {
+  background: white;
+  color: #1a365d;
+  align-self: flex-start;
+}
+
+/* USER */
+.chat.user {
+  background: #2b6cb0;
+  color: white;
+  align-self: flex-end;
+}
+
+/* INPUT */
+.chat-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+  background: white;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+}
+
+.chat-input button {
+  background: #2b6cb0;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- SUN MENU -->
+  <div class="sun-menu" id="sun" onclick="toggleMenu()">
+    <div class="sun-text" id="sunText">
+      <span>ME</span>
+      <span>NU</span>
+    </div>
+  </div>
+
+  <!-- MENU PANEL -->
+  <div class="menu-panel" id="menu">
+
+    <!-- STARS -->
+    <div class="stars">
+      <div class="star" style="top:10%; left:20%;"></div>
+      <div class="star" style="top:30%; left:70%;"></div>
+      <div class="star" style="top:50%; left:40%;"></div>
+      <div class="star" style="top:70%; left:80%;"></div>
+      <div class="star" style="top:20%; left:90%;"></div>
+      <div class="star" style="top:80%; left:10%;"></div>
+      <div class="star" style="top:60%; left:60%;"></div>
+      <div class="star" style="top:40%; left:15%;"></div>
+    </div>
+
+    <a href="#">Home</a>
+    <a href="#">Tentang Ralyne</a>
+    <a href="#">Corner</a>
+  </div>
+
+  <!-- bubbles -->
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <div class="bubble bubble4"></div>
+  <div class="bubble bubble5"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Ralyne van Irwan</h1>
+      <p>Official Playful Site</p>
+      <a href="#" class="btn">Explore</a>
+    </div>
+
+    <div class="hero-img">
+      <div class="shape-outline"></div>
+      <div class="shape-bg"></div>
+
+      <div class="blob">
+        <video autoplay muted loop playsinline>
+          <source src="ralynehome.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider">
+    <div class="ground"></div>
+    <div class="tree tree1"></div>
+    <div class="tree tree2"></div>
+    <div class="tree tree3"></div>
+  </div>
+
+  <!-- SECTION -->
+<section class="bio-section">
+  <div class="bio-container">
+
+<div class="bio-left">
+  <div class="bio-photo-wrap">
+
+    <!-- FOTO TAMBAHAN -->
+<div class="extra-photo extra1">
+  <div class="wood-frame small">
+    <img src="ralynebio1.png">
+  </div>
+</div>
+
+<div class="extra-photo extra2">
+  <div class="wood-frame small">
+    <img src="ralynebio2.png">
+  </div>
+</div>
+
+    <!-- FOTO UTAMA -->
+    <div class="wood-frame">
+      <img src="ralynebio.png" alt="Ralyne">
+    </div>
+
+  </div>
+</div>
+    <!-- TENGAH: SUNGAI -->
+    <div class="bio-river"></div>
+
+    <!-- KANAN: BIODATA -->
+    <div class="bio-right">
+      <h2>Ralyne van Irwan</h2>
+
+      <div class="bio-card">
+        <p><strong>TTL:</strong> 15 Oktober 2011</p>
+        <p><strong>Asal:</strong> Medan</p>
+        <p><strong>Golongan Darah:</strong> AB</p>
+        <p><strong>Horoskop:</strong> Libra</p>
+        <p><strong>Tinggi:</strong> 152 cm</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="calendar-section">
+  <h2>CalendeRalyne</h2>
+
+<img src="monyetralyne.png" class="calendar-bg-img desktop-img" alt="bg">
+<img src="monyetralyne1.png" class="calendar-bg-img mobile-img" alt="bg">
+
+  <div class="calendar-header">
+    <button onclick="changeMonth(-1)">←</button>
+    <h3 id="monthYear"></h3>
+    <button onclick="changeMonth(1)">→</button>
+  </div>
+
+  <button class="today-btn" onclick="goToday()">Today</button>
+
+  <div class="calendar-box" id="calendar"></div>
+</section>
+
+<section class="message-section">
+  <h2>Pesan untuk Ralyne 💌</h2>
+
+  <!-- FORM -->
+  <div class="message-form-box">
+    <h3>Kirim Pesan untuk Ralyne 💌</h3>
+
+    <div class="message-form">
+      <label>Nama</label>
+      <input type="text" id="nama" placeholder="Tulis nama kamu">
+
+      <label>Pesan</label>
+      <textarea id="pesan" placeholder="Kirimkan pesan terbaikmu untuk Ralyne"></textarea>
+
+      <button onclick="kirimPesan()" id="btnKirim">Kirim Pesan</button>
+
+      <p id="statusKirim" class="status-text"></p>
+    </div>
+  </div>
+
+  <!-- 🔍 SEARCH -->
+  <div class="search-box">
+    <input 
+      type="text" 
+      id="searchNama" 
+      placeholder="🔍 Cari nama pengirim..."
+      oninput="filterPesan()"
+    >
+  </div>
+
+  <!-- SLIDER -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper" id="messageList"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- FLOAT BUTTON -->
+<div class="chat-toggle" onclick="toggleChat()">💬</div>
+
+<!-- CHAT BOX -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-header">
+    <span>Ralyne A.I 💙</span>
+    <span class="close-btn" onclick="toggleChat()">✖</span>
+  </div>
+
+  <div class="chat-body" id="chatBody">
+    <div class="chat ai">Haiii! Aku Ralyne A.I 🌷 mau ngobrol apa hari ini?</div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Ketik pesan..." />
+    <button onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Copyright © 2026 Ralyne Play • All Rights Reserved</p>
+</footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      const sun = document.getElementById("sun");
+      const text = document.getElementById("sunText");
+
+      menu.classList.toggle("active");
+      sun.classList.toggle("active");
+
+      if (menu.classList.contains("active")) {
+        text.innerHTML = "<span>CLO</span><span>SE</span>";
+      } else {
+        text.innerHTML = "<span>ME</span><span>NU</span>";
+      }
+    }
+  </script>
+
+<script>
+let currentDate = new Date();
+
+// DATA EVENT
+const events = {
+  "2026-10-15": [
+    {
+      title: "🎂 Birthday Ralyne",
+      time: "19:00 WIB",
+      place: "Jakarta",
+      desc: "Perayaan ulang tahun Ralyne bersama fans 🎉",
+      image: "ralyneacara.jpg"
+    }
+  ],
+  "2026-03-01": [
+    {
+      title: "📚 JKT48 School",
+      time: "19:30 WIB",
+      place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
+      desc: "Kegiatan belajar dan interaksi member",
+      image: "ralyneacara.jpg"
+    }
+  ],
+  "2026-03-08": [
+    {
+      title: "📚 JKT48 School",
+      time: "19:30 WIB",
+      place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
+      desc: "Kegiatan belajar dan interaksi member",
+      image: "ralyneacara.jpg"
+    }
+  ],
+  "2026-03-15": [
+    {
+      title: "📚 JKT48 School",
+      time: "19:30 WIB",
+      place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
+      desc: "Kegiatan belajar dan interaksi member",
+      image: "ralyneacara.jpg"
+    }
+  ],
+  "2026-02-22": [
+    {
+      title: "📚 JKT48 School",
+      time: "19:30 WIB",
+      place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
+      desc: "Kegiatan belajar dan interaksi member",
+      image: "ralyneacara.jpg"
+    }
+  ]
+};
+
+function renderCalendar() {
+  const calendar = document.getElementById("calendar");
+  const monthYear = document.getElementById("monthYear");
+
+  calendar.innerHTML = "";
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
+
+  const today = new Date();
+
+  const monthNames = [
+    "Januari","Februari","Maret","April","Mei","Juni",
+    "Juli","Agustus","September","Oktober","November","Desember"
+  ];
+
+  monthYear.innerText = `${monthNames[month]} ${year}`;
+
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  days.forEach(day => {
+    const div = document.createElement("div");
+    div.className = "day-name";
+    div.innerText = day;
+    calendar.appendChild(div);
+  });
+
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    calendar.appendChild(empty);
+  }
+
+  for (let d = 1; d <= lastDate; d++) {
+    const div = document.createElement("div");
+    div.className = "day";
+
+    const fullDate = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    div.innerHTML = `<div>${d}</div>`;
+
+    if (
+      d === today.getDate() &&
+      month === today.getMonth() &&
+      year === today.getFullYear()
+    ) {
+      div.classList.add("today");
+    }
+
+    if (events[fullDate]) {
+      events[fullDate].forEach(ev => {
+        const evDiv = document.createElement("div");
+        evDiv.className = "event";
+        evDiv.innerText = ev.title;
+
+        evDiv.onclick = () => openPopup(ev);
+
+        div.appendChild(evDiv);
+      });
+    }
+
+    calendar.appendChild(div);
+  }
+}
+
+function changeMonth(step) {
+  currentDate.setMonth(currentDate.getMonth() + step);
+  renderCalendar();
+}
+
+function goToday() {
+  currentDate = new Date();
+  renderCalendar();
+}
+
+// ✅ POPUP FUNCTION (MASUK KE SCRIPT)
+function openPopup(eventData) {
+  document.getElementById("popup").classList.add("active");
+
+  document.getElementById("popup-title").innerText = eventData.title;
+  document.getElementById("popup-time").innerText = eventData.time;
+  document.getElementById("popup-place").innerText = eventData.place;
+  document.getElementById("popup-desc").innerText = eventData.desc;
+  document.getElementById("popup-img").src = eventData.image;
+}
+
+function closePopup() {
+  document.getElementById("popup").classList.remove("active");
+}
+
+// load pertama
+renderCalendar();
+</script>
+
+</script>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbzM1voOnpu6TnW3fJnno50m3mx1nbp-AT96EllCmAmwIIYVAbr_tcxH_aQwXQL07xFC/exec";
+
+let swiper;
+let semuaPesan = [];
+
+// ================= NORMALIZE TEXT =================
+function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .replace(/4/g, "a")
+    .replace(/3/g, "e")
+    .replace(/1/g, "i")
+    .replace(/0/g, "o")
+    .replace(/5/g, "s")
+    .replace(/7/g, "t")
+    .replace(/@/g, "a")
+    .replace(/!/g, "i")
+    .replace(/\$/g, "s")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+// ================= DATABASE KATA =================
+const badWords = [
+  // umum
+  "anjing","anj","ajg","bangsat","bgsd",
+  "kontol","memek","ngentot","titid","titit",
+  "tolol","goblok","idiot","babi","brengsek",
+
+  // tambahan indo
+  "bodoh","bego","dungu","sinting","edan",
+  "kampungan","norak","alay",
+
+  // medan / sumut vibes
+  "paok",
+  "bah","bahenol", // optional tergantung konteks
+  "pantek",
+  "puki",
+  "kimak",
+  "cukimai",
+  "jancok", // jatim tapi sering dipakai juga
+  "tai"
+];
+
+const hatePatterns = [
+  // lama
+  "gakbisanyanyi","gabisa nyanyi","fales","offkey",
+  "jelek","burik","ga cantik","ga imut",
+  "gabisa dance","kaku","ga berbakat",
+  "no talent","males liat","ga cocok jadi idol",
+
+  // tambahan hujatan
+  "jelek banget",
+  "suara hancur",
+  "cringe",
+  "memalukan",
+  "ga layak",
+  "mending keluar",
+  "bubar aja",
+  "ga guna",
+  "sampah",
+
+  // tambahan bodoh-bodohan
+  "bodoh banget",
+  "bego banget",
+  "tolol banget",
+  "otak kosong",
+  "ga punya otak"
+];
+
+const sexualWords = [
+  "paha","dada","tetek","toket","payudara",
+  "seksi","hot","sange",
+  "crot","crotin","ngewe",
+  "ngentot","entot",
+  "coli","bacol","colmek",
+  "ngocok","tete","tt","gede",
+  "bokep","porn","porno",
+  "bahan","imajinasi",
+  "desah","ahh","uhh"
+];
+
+// ================= DETEKSI =================
+function isToxic(text) {
+  const normal = normalizeText(text);
+
+  // 🔴 kata kasar
+  for (let word of badWords) {
+    if (normal.includes(word)) return "kasar";
+  }
+
+  // 💔 hujatan
+  const lower = text.toLowerCase();
+  for (let pattern of hatePatterns) {
+    if (lower.includes(pattern)) return "hujat";
+  }
+
+  // 🔞 seksual
+  for (let word of sexualWords) {
+    if (normal.includes(word)) return "seksual";
+  }
+
+  return false;
+}
+
+function sensorText(text) {
+  let hasil = text;
+
+  const semuaKata = [...badWords, ...sexualWords];
+
+  semuaKata.forEach(kata => {
+    const regex = new RegExp(kata, "gi");
+    hasil = hasil.replace(regex, "****");
+  });
+
+  return hasil;
+}
+
+// ================= KIRIM PESAN =================
+function kirimPesan() {
+  const nama = document.getElementById("nama").value;
+  let pesan = document.getElementById("pesan").value;
+  const status = document.getElementById("statusKirim");
+  const tombol = document.getElementById("btnKirim");
+
+  if (!nama || !pesan) {
+    status.innerText = "⚠️ Mohon isi nama dan pesan terlebih dahulu.";
+    return;
+  }
+
+  // 🔥 FILTER FRONTEND
+const toxicType = isToxic(nama) || isToxic(pesan);
+
+if (toxicType) {
+  let pesanError = "🚫 Pesan tidak bisa dikirim!";
+
+  if (toxicType === "kasar") {
+    pesanError = "🚫 Tidak boleh menggunakan kata kasar!";
+  }
+
+  if (toxicType === "hujat") {
+    pesanError = "🚫 Jangan menghina atau menjatuhkan 😢";
+  }
+
+  if (toxicType === "seksual") {
+    pesanError = "🚫 Konten tidak pantas terdeteksi!";
+  }
+
+  status.innerText = pesanError;
+  status.className = "status-text error";
+  return;
+}
+
+  status.innerText = "⏳ Sedang mengirim pesan...";
+  tombol.disabled = true;
+  tombol.innerText = "Mengirim...";
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({ nama, pesan })
+  })
+  .then(res => res.text())
+  .then(res => {
+
+    // 🔒 HANDLE BACKEND BLOCK
+    if (res === "BLOCKED") {
+      status.innerText = "🚫 Pesan ditolak oleh sistem (tidak pantas)";
+      tombol.disabled = false;
+      tombol.innerText = "Kirim Pesan";
+      return;
+    }
+
+    status.innerText = "✅ Pesan berhasil dikirim!";
+    tombol.disabled = false;
+    tombol.innerText = "Kirim Pesan";
+
+    document.getElementById("nama").value = "";
+    document.getElementById("pesan").value = "";
+
+    const now = new Date();
+
+    const dataBaru = {
+      nama,
+      pesan,
+      waktu: now
+    };
+
+    semuaPesan.unshift(dataBaru);
+    tampilkanPesan(semuaPesan);
+  })
+  .catch(() => {
+    status.innerText = "❌ Gagal mengirim pesan.";
+    tombol.disabled = false;
+    tombol.innerText = "Kirim Pesan";
+  });
+}
+
+// ================= LOAD PESAN =================
+function loadPesan() {
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      semuaPesan = data.reverse();
+      tampilkanPesan(semuaPesan);
+    });
+}
+
+// ================= TAMPILKAN =================
+function tampilkanPesan(data) {
+  const list = document.getElementById("messageList");
+  list.innerHTML = "";
+
+  if (data.length === 0) {
+    list.innerHTML = "<p style='text-align:center'>Tidak ada pesan ditemukan 😢</p>";
+    return;
+  }
+
+  data.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "swiper-slide";
+
+    div.innerHTML = `
+      <div class="message-card">
+        <h4>${item.nama}</h4>
+        <small>${formatTanggal(item.waktu)}</small>
+        <p>${item.pesan}</p>
+      </div>
+    `;
+
+    list.appendChild(div);
+  });
+
+  initSwiper();
+}
+
+// ================= FILTER =================
+function filterPesan() {
+  const keyword = document.getElementById("searchNama").value.toLowerCase();
+
+  const hasil = semuaPesan.filter(item =>
+    item.nama.toLowerCase().includes(keyword)
+  );
+
+  tampilkanPesan(hasil);
+}
+
+// ================= SWIPER =================
+function initSwiper() {
+  if (swiper) {
+    swiper.destroy(true, true);
+  }
+
+  swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+}
+
+// ================= FORMAT =================
+function formatTanggal(waktu) {
+  const date = new Date(waktu);
+
+  const hari = date.getDate();
+  const bulan = date.toLocaleString("id-ID", { month: "long" });
+  const tahun = date.getFullYear();
+
+  const jam = date.getHours().toString().padStart(2, "0");
+  const menit = date.getMinutes().toString().padStart(2, "0");
+
+  return `${hari} ${bulan} ${tahun} • ${jam}:${menit}`;
+}
+
+// LOAD AWAL
+window.addEventListener("load", () => {
+  loadPesan();
+});
+</script>
+
+<script>
+function toggleChat() {
+  const chat = document.getElementById("chatWidget");
+  chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+}
+
+function sendMessage() {
+  const input = document.getElementById("chatInput");
+  const chatBody = document.getElementById("chatBody");
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  // USER
+  const userMsg = document.createElement("div");
+  userMsg.className = "chat user";
+  userMsg.innerText = text;
+  chatBody.appendChild(userMsg);
+
+  input.value = "";
+
+  // LOADING
+  const loading = document.createElement("div");
+  loading.className = "chat ai";
+  loading.innerText = "Ralyne lagi mikir... 💭";
+  chatBody.appendChild(loading);
+
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  // CONNECT KE AI
+  fetch("http://localhost:3000/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: text })
+  })
+  .then(res => res.json())
+  .then(data => {
+    loading.remove();
+
+    const aiMsg = document.createElement("div");
+    aiMsg.className = "chat ai";
+    aiMsg.innerText = data.reply;
+    chatBody.appendChild(aiMsg);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+  })
+  .catch(() => {
+    loading.innerText = "Aduh error 😢 coba lagi ya";
+  });
+}
+</script>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePopup()">✖</span>
+    
+    <img id="popup-img" src="" alt="event">
+
+    <h3 id="popup-title"></h3>
+    <p><strong>Waktu:</strong> <span id="popup-time"></span></p>
+    <p><strong>Tempat:</strong> <span id="popup-place"></span></p>
+    <p id="popup-desc"></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</body>
+</html>
