@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tentang Ralyne</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #bfe4ff;
+  overflow-x: hidden;
+}
+
+/* ================= SUN MENU (SAMA PERSIS) ================= */
+
+.sun-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: #ffd966;
+  border-bottom-left-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.4s;
+  overflow: hidden;
+}
+
+/* MODE BULAN */
+.sun-menu.active {
+  background: #f5f1e6;
+}
+
+.sun-menu.active::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: #e8e2d3;
+  border-radius: 50%;
+  top: 20px;
+  right: 20px;
+  box-shadow: -25px 0 0 0 #f5f1e6;
+}
+
+/* TEXT */
+.sun-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  font-weight: 700;
+  color: #2b6cb0;
+  transform: rotate(-20deg);
+  transition: 0.3s;
+  font-size: 20px;
+  z-index: 2;
+}
+
+/* ================= MENU PANEL ================= */
+
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  z-index: 998;
+}
+
+/* NIGHT MODE */
+.menu-panel.active {
+  right: 0;
+  background: radial-gradient(circle at top, #1a1a2e, #0f172a);
+  overflow: hidden;
+}
+
+/* LINK */
+.menu-panel a {
+  font-size: 32px;
+  margin: 15px 0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+  position: relative;
+  z-index: 2;
+  color: #ffd966;
+}
+
+.menu-panel a:hover {
+  transform: scale(1.1);
+}
+
+/* ================= STARS ================= */
+
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.5); }
+}
+
+/* ================= CONTENT ================= */
+
+.about {
+  padding: 120px 10% 80px;
+  text-align: center;
+}
+
+.about h1 {
+  font-size: 48px;
+  color: #2b6cb0;
+}
+
+.about p {
+  margin-top: 10px;
+  color: #444;
+}
+
+/* BOX */
+.about-box {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about-img img {
+  width: 260px;
+  border-radius: 20px;
+}
+
+.about-text {
+  text-align: left;
+}
+
+.info {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* FOOTER */
+.footer {
+  background: #ffd966;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #1a365d;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+  .about-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* HERO VIDEO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* OVERLAY TEXT */
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.hero-overlay h1 {
+  font-size: 48px;
+  background: rgba(0,0,0,0.4);
+  padding: 15px 25px;
+  border-radius: 15px;
+}
+
+.hero-overlay p {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* DARK OVERLAY */
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.3);
+}
+
+.countdown-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.time-box {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 15px 18px;
+  border-radius: 12px;
+  min-width: 70px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.time-box span {
+  font-size: 28px;
+  font-weight: 700;
+  display: block;
+}
+
+.time-box small {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.countdown-text {
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.countdown-container,
+.countdown-text {
+  position: relative;
+  z-index: 3;
+  color: white;
+}
+
+.time-box {
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SUN MENU -->
+<div class="sun-menu" id="sun" onclick="toggleMenu()">
+  <div class="sun-text" id="sunText">
+    <span>ME</span>
+    <span>NU</span>
+  </div>
+</div>
+
+<!-- MENU PANEL -->
+<div class="menu-panel" id="menu">
+
+  <!-- STARS -->
+  <div class="stars">
+    <div class="star" style="top:10%; left:20%;"></div>
+    <div class="star" style="top:30%; left:70%;"></div>
+    <div class="star" style="top:50%; left:40%;"></div>
+    <div class="star" style="top:70%; left:80%;"></div>
+    <div class="star" style="top:20%; left:90%;"></div>
+    <div class="star" style="top:80%; left:10%;"></div>
+    <div class="star" style="top:60%; left:60%;"></div>
+    <div class="star" style="top:40%; left:15%;"></div>
+  </div>
+
+  <a href="index.html">Home</a>
+  <a href="about.html">Tentang Ralyne</a>
+  <a href="#">Corner</a>
+</div>
+
+<!-- HERO VIDEO -->
+<section class="hero">
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="heroralyne.mp4" type="video/mp4">
+  </video>
+
+<div class="hero-overlay">
+
+  <p class="countdown-text">Menuju Ulang Tahun Ralyne 🎉</p>
+
+  <div class="countdown-container">
+    <div class="time-box">
+      <span id="days">0</span>
+      <small>Hari</small>
+    </div>
+    <div class="time-box">
+      <span id="hours">0</span>
+      <small>Jam</small>
+    </div>
+    <div class="time-box">
+      <span id="minutes">0</span>
+      <small>Menit</small>
+    </div>
+    <div class="time-box">
+      <span id="seconds">0</span>
+      <small>Detik</small>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- CONTENT -->
+<section class="about">
+  <h1>Tentang Ralyne</h1>
+  <p>Mengenal lebih dekat Ralyne ✨</p>
+
+  <div class="about-box">
+    <div class="about-img">
+      <img src="ralynebio.png">
+    </div>
+
+    <div class="about-text">
+      <h2>Ralyne van Irwan</h2>
+      <p>Ralyne adalah sosok ceria yang selalu ingin menghibur lewat gameplay-nya.</p>
+
+      <div class="info">
+        <p>TTL: 15 Oktober 2011</p>
+        <p>Asal: Medan</p>
+        <p>Golongan Darah: AB</p>
+        <p>Tinggi: 152 cm</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Copyright © 2026 Ralyne Play • All Rights Reserved</p>
+  </footer>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  const sun = document.getElementById("sun");
+  const text = document.getElementById("sunText");
+
+  menu.classList.toggle("active");
+  sun.classList.toggle("active");
+
+  document.body.classList.toggle("menu-open");
+
+  if (menu.classList.contains("active")) {
+    text.innerHTML = "<span>CLO</span><span>SE</span>";
+  } else {
+    text.innerHTML = "<span>ME</span><span>NU</span>";
+  }
+}
+</script>
+
+<script>
+const daysEl = document.getElementById("days");
+const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
+const secondsEl = document.getElementById("seconds");
+
+const targetDate = new Date("Oct 15, 2026 00:00:00").getTime();
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if (distance < 0) {
+    document.querySelector(".countdown-container").innerHTML =
+      "🎉 HAPPY BIRTHDAY RALYNE 🎉";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((distance / (1000 * 60)) % 60);
+  const seconds = Math.floor((distance / 1000) % 60);
+
+  daysEl.innerText = days;
+  hoursEl.innerText = hours;
+  minutesEl.innerText = minutes;
+  secondsEl.innerText = seconds;
+}, 1000);
+</script>
+
+</body>
+</html>
