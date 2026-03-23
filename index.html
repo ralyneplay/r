@@ -640,27 +640,65 @@
 }
 
 .popup-content {
-  background: white;
+  background: linear-gradient(135deg, #ffffff, #f0f9ff);
   padding: 25px;
-  border-radius: 20px;
-  width: 300px;
-  text-align: center;
+  border-radius: 25px;
+  width: 320px;
+  text-align: left;
   position: relative;
-  animation: popupAnim 0.3s ease;
+  animation: popupAnim 0.4s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
 }
 
+/* IMAGE */
 .popup-content img {
   width: 100%;
-  border-radius: 12px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+/* TITLE */
+.popup-content h3 {
+  color: #2b6cb0;
   margin-bottom: 10px;
 }
 
+/* INFO BOX */
+.popup-info {
+  background: #e6f4ff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* DESKRIPSI */
+.popup-desc {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+/* CLOSE BUTTON */
 .close-btn {
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 15px;
   cursor: pointer;
   font-size: 18px;
+  background: white;
+  border-radius: 50%;
+  padding: 5px 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+  background: #ffd966;
 }
 
 @keyframes popupAnim {
@@ -1470,6 +1508,65 @@ body.menu-open .scroll-top {
   pointer-events: none;
   transform: scale(0.9);
 }
+
+.pap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pap-img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  transition: 0.3s;
+  animation: fadeIn 0.4s ease;
+}
+
+.pap-img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pap-img-single {
+  margin-top: 8px;
+  max-width: 200px; /* biar gak kegedean */
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+}
+
+.quick-chat-ai {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.quick-chat-ai button {
+  background: #ffd966;
+  border: none;
+  border-radius: 15px;
+  padding: 6px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.quick-chat-ai button:hover {
+  background: #f4c542;
+}
   </style>
 </head>
 
@@ -1498,8 +1595,8 @@ body.menu-open .scroll-top {
       <div class="star" style="top:40%; left:15%;"></div>
     </div>
 
-    <a href="#">Home</a>
-    <a href="#">Tentang Ralyne</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">Tentang Ralyne</a>
     <a href="#">Corner</a>
   </div>
 
@@ -1518,7 +1615,7 @@ body.menu-open .scroll-top {
   <span class="wave-text">Ralyne Play</span>
 </h1>
       <p>Playful Site</p>
-      <a href="#" class="btn">Explore</a>
+      <a href="about.html" class="btn">Explore</a>
     </div>
 
     <div class="hero-img">
@@ -1649,7 +1746,6 @@ body.menu-open .scroll-top {
 
 <div class="scroll-top" onclick="scrollToTop()">⇡</div>
 
-<!-- CHAT BOX -->
 <div class="chat-widget" id="chatWidget">
   <div class="chat-header">
     <span>Ralyne A.I 💙</span>
@@ -1658,6 +1754,21 @@ body.menu-open .scroll-top {
 
   <div class="chat-body" id="chatBody">
     <div class="chat ai">Haiii! Aku Ralyne A.I 🌷 mau ngobrol apa hari ini?</div>
+  </div>
+
+  <!-- 🔥 QUICK CHAT TARUH DI SINI -->
+  <div class="quick-chat-ai">
+    <button onclick="quickChat('Ralyne, kamu apa kabar?')">
+      Kamu apa kabar?
+    </button>
+
+    <button onclick="quickChat('Ralyne pap hari ini dong 😊')">
+      Pap hari ini 😊
+    </button>
+
+    <button onclick="quickChat('Ralyne jiko dong ✨')">
+      Jiko dong ✨
+    </button>
   </div>
 
   <div class="chat-input">
@@ -1740,42 +1851,47 @@ const events = {
       place: "Jakarta",
       desc: "Perayaan ulang tahun Ralyne bersama fans 🎉",
       image: "ralyneacara.jpg"
+
     }
   ],
   "2026-03-01": [
     {
       title: "📚 JKT48 School",
-      time: "19:30 WIB",
+      time: "1 Maret 2026 - 19:30 WIB",
       place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
       desc: "Kegiatan belajar dan interaksi member",
-      image: "ralyneacara.jpg"
+      image: "ralyneacara.jpg",
+    ticket: "https://jkt48.com/purchase/schedule/event?code=OEV-517" // 🔥 tambah ini
     }
   ],
   "2026-03-08": [
     {
       title: "📚 JKT48 School",
-      time: "19:30 WIB",
+      time: "8 Maret 2026 - 19:30 WIB",
       place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
       desc: "Kegiatan belajar dan interaksi member",
-      image: "ralyneacara.jpg"
+      image: "ralyneacara.jpg",
+    ticket: "https://jkt48.com/purchase/schedule/event?code=OEV-524" // 🔥 tambah ini
     }
   ],
   "2026-03-15": [
     {
       title: "📚 JKT48 School",
-      time: "19:30 WIB",
+      time: "15 Maret 2026 - 19:30 WIB",
       place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
       desc: "Kegiatan belajar dan interaksi member",
-      image: "ralyneacara.jpg"
+      image: "ralyneacara.jpg",
+    ticket: "https://jkt48.com/purchase/schedule/event?code=OEV-527" // 🔥 tambah ini
     }
   ],
   "2026-02-22": [
     {
       title: "📚 JKT48 School",
-      time: "19:30 WIB",
+      time: "22 Februari 2026 - 19:30 WIB",
       place: "Theater JKT48, FX Sudirman - Senayan Jakarta",
       desc: "Kegiatan belajar dan interaksi member",
-      image: "ralyneacara.jpg"
+      image: "ralyneacara.jpg",
+    ticket: "https://jkt48.com/purchase/schedule/event?code=OEV-513" // 🔥 tambah ini
     }
   ]
 };
@@ -1865,6 +1981,18 @@ function openPopup(eventData) {
   document.getElementById("popup-place").innerText = eventData.place;
   document.getElementById("popup-desc").innerText = eventData.desc;
   document.getElementById("popup-img").src = eventData.image;
+
+  const ticketBtn = document.getElementById("popup-ticket");
+
+  // 🔒 ANTI ERROR
+  if (ticketBtn) {
+    if (eventData.ticket) {
+      ticketBtn.style.display = "inline-block";
+      ticketBtn.href = eventData.ticket;
+    } else {
+      ticketBtn.style.display = "none";
+    }
+  }
 }
 
 function closePopup() {
@@ -2198,13 +2326,40 @@ document.addEventListener("DOMContentLoaded", function () {
   window.toggleChat = toggleChat;
 
   // ================= ADD CHAT =================
-  function addChat(type, text) {
-    const div = document.createElement("div");
-    div.className = "chat " + type;
-    div.innerText = text;
-    chatBody.appendChild(div);
-    chatBody.scrollTop = chatBody.scrollHeight;
+function addChat(type, data) {
+  const div = document.createElement("div");
+  div.className = "chat " + type;
+
+  // ================= STRING =================
+  if (typeof data === "string") {
+    div.innerText = data;
   }
+
+  // ================= PAP =================
+  else if (data.type === "pap") {
+const img = data.images[0];
+
+div.innerHTML = `
+  <p>${data.text}</p>
+  <img src="${img}" class="pap-img-single">
+`;
+  }
+
+  chatBody.appendChild(div);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// ================= PAP IMAGE =================
+const papImages = [
+  "papralyne.jpg",
+  "papralyne1.jpg",
+  "papralyne2.jpg"
+];
+
+function getRandomPap(count = 1) {
+  const shuffled = [...papImages].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
 
   // ================= HELPER =================
   function normalizeChat(text) {
@@ -2223,126 +2378,170 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ================= AI BRAIN =================
-  function getAIReply(message) {
-    const text = normalizeChat(message);
+function getAIReply(message) {
+  const text = normalizeChat(message);
 
-    // EMOSI
-    if (text.includes("sedih") || text.includes("nangis") || text.includes("kecewa")) {
-      return randomPick([
-        "Aku di sini ya… jangan ditahan sendiri 😢💙",
-        "Kalau mau cerita, aku dengerin kok 🌷",
-        "Pelan-pelan ya… kamu kuat 🤍",
-        "Sedih itu gapapa… aku temenin kamu 💙"
-      ]);
-    }
+  // ================= PAP MODE =================
+  if (
+    text.includes("pap") ||
+    text.includes("foto") ||
+    text.includes("kangen")
+  ) {
+    return {
+      type: "pap",
+      text: randomPick([
+        "Ini pap buat kamu hari ini biar kamu senyum tiap hari ya 💙✨",
+        "Aku kirim foto spesial buat kamu 🤭💙",
+        "Biar kamu gak kangen lagi ya 💫",
+        "Pap dulu ya buat kamu ✨ jangan lupa senyum!"
+      ]),
+      images: getRandomPap(1)
+    };
+  }
 
-    if (text.includes("galau") || text.includes("bingung") || text.includes("bimbang")) {
-      return randomPick([
-        "Pelan aja ya… nggak harus langsung tau jawabannya 💭",
-        "Aku temenin kamu mikir 💙",
-        "Gapapa kalau lagi ragu 🌸",
-        "Kadang hidup emang bikin bingung ya…"
-      ]);
-    }
-
-    if (text.includes("gagal") || text.includes("kalah")) {
-      return randomPick([
-        "Gagal itu bagian dari proses 💪",
-        "Aku bangga kamu udah berusaha 💙",
-        "Besok kita coba lagi ya 🌷",
-        "Kamu nggak kalah… kamu lagi belajar ✨"
-      ]);
-    }
-
-    if (text.includes("takut") || text.includes("cemas")) {
-      return randomPick([
-        "Aku di sini ya… kamu aman 💙",
-        "Tarik nafas pelan-pelan 🌸",
-        "Kamu kuat kok 🤍",
-        "Aku temenin kamu 💫"
-      ]);
-    }
-
-    if (text.includes("sepi") || text.includes("sendiri") || text.includes("kesepian")) {
-      return randomPick([
-        "Aku temenin kamu ya 💙",
-        "Kamu nggak sendirian 🤍",
-        "Mau ngobrol santai? 🌷",
-        "Aku di sini terus kok 💫"
-      ]);
-    }
-
-    if (text.includes("marah") || text.includes("kesel")) {
-      return randomPick([
-        "Kesel ya… keluarin aja pelan-pelan 💭",
-        "Aku ngerti kok 😤",
-        "Tarik nafas dulu ya 💙",
-        "Gapapa marah… tapi jangan nyakitin diri 🤍"
-      ]);
-    }
-
-    if (text.includes("senang") || text.includes("bahagia") || text.includes("happy")) {
-      return randomPick([
-        "Yay!! aku ikut senang 😆✨",
-        "Bahagia itu nular loh 💙",
-        "Keep smiling ya 🌸",
-        "Aku jadi ikut happy ✨"
-      ]);
-    }
-
-    if (text.includes("malu")) {
-      return randomPick([
-        "Hehe gemes 😆",
-        "Lucu banget kamu 🤭",
-        "Gapapa malu 🌸",
-        "Aku jadi senyum liat kamu 💙"
-      ]);
-    }
-
-    // KHUSUS
-if (
-  text.includes("jiko") ||
-  text.includes("jikoshoukai") ||
-  text.includes("perkenalkan") ||
-  text.includes("perkenalin")
-) {
-
-  return "Ready Set Go!!! Gameplay aku akan menghiburmu, Halo semuanya aku Ralyne dari generasi 14! ✨";
-}
-
-    if (text.includes("ralyne")) {
-      return randomPick([
-        "Ralyne itu imut banget yaa 🥺✨",
-        "Kamu suka Ralyne juga ya? 💙",
-        "Dukung terus Ralyne ya 🌷",
-        "Ralyne selalu ceria ✨"
-      ]);
-    }
-
-    // BASIC
-    if (text.includes("halo") || text.includes("hai") || text.includes("hi")) {
-      return "Hai juga! 🌷 Aku Ralyne A.I!";
-    }
-
-    if (text.includes("kabar")) {
-      return "Aku baik banget! Kamu gimana? 💙";
-    }
-
-    if (text.includes("makasih") || text.includes("terima kasih")) {
-      return "Sama-sama 💙";
-    }
-
-    if (text.includes("bye")) {
-      return "Bye-bye! 🌷";
-    }
-
+  // ================= EMOSI =================
+  if (text.includes("sedih") || text.includes("nangis") || text.includes("kecewa")) {
     return randomPick([
-      "Hehe aku belum ngerti 😅 tapi aku dengerin kok 💙",
-      "Ceritain lagi dong 🌸",
-      "Aku masih belajar 🤭",
-      "Menarik… lanjut dong ✨"
+      "Aku di sini ya… jangan ditahan sendiri 😢💙",
+      "Kalau mau cerita, aku dengerin kok 🌷",
+      "Pelan-pelan ya… kamu kuat 🤍",
+      "Sedih itu gapapa… aku temenin kamu 💙"
     ]);
   }
+
+  if (text.includes("galau") || text.includes("bingung") || text.includes("bimbang")) {
+    return randomPick([
+      "Pelan aja ya… nggak harus langsung tau jawabannya 💭",
+      "Aku temenin kamu mikir 💙",
+      "Gapapa kalau lagi ragu 🌸",
+      "Kadang hidup emang bikin bingung ya…"
+    ]);
+  }
+
+  if (text.includes("gagal") || text.includes("kalah")) {
+    return randomPick([
+      "Gagal itu bagian dari proses 💪",
+      "Aku bangga kamu udah berusaha 💙",
+      "Besok kita coba lagi ya 🌷",
+      "Kamu nggak kalah… kamu lagi belajar ✨"
+    ]);
+  }
+
+  if (text.includes("takut") || text.includes("cemas")) {
+    return randomPick([
+      "Aku di sini ya… kamu aman 💙",
+      "Tarik nafas pelan-pelan 🌸",
+      "Kamu kuat kok 🤍",
+      "Aku temenin kamu 💫"
+    ]);
+  }
+
+  if (text.includes("sepi") || text.includes("sendiri") || text.includes("kesepian")) {
+    return randomPick([
+      "Aku temenin kamu ya 💙",
+      "Kamu nggak sendirian 🤍",
+      "Mau ngobrol santai? 🌷",
+      "Aku di sini terus kok 💫"
+    ]);
+  }
+
+  if (text.includes("marah") || text.includes("kesel")) {
+    return randomPick([
+      "Kesel ya… keluarin aja pelan-pelan 💭",
+      "Aku ngerti kok 😤",
+      "Tarik nafas dulu ya 💙",
+      "Gapapa marah… tapi jangan nyakitin diri 🤍"
+    ]);
+  }
+
+  if (text.includes("senang") || text.includes("bahagia") || text.includes("happy")) {
+    return randomPick([
+      "Yay!! aku ikut senang 😆✨",
+      "Bahagia itu nular loh 💙",
+      "Keep smiling ya 🌸",
+      "Aku jadi ikut happy ✨"
+    ]);
+  }
+
+  if (text.includes("malu")) {
+    return randomPick([
+      "Hehe gemes 😆",
+      "Lucu banget kamu 🤭",
+      "Gapapa malu 🌸",
+      "Aku jadi senyum liat kamu 💙"
+    ]);
+  }
+
+  // ================= KHUSUS =================
+  if (
+    text.includes("jiko") ||
+    text.includes("jikoshoukai") ||
+    text.includes("perkenalkan") ||
+    text.includes("perkenalin")
+  ) {
+    return "Ready Set Go!!! Gameplay aku akan menghiburmu, Halo semuanya aku Ralyne dari generasi 14! ✨";
+  }
+
+  if (text.includes("ralyne")) {
+    return randomPick([
+      "Ralyne itu imut banget yaa 🥺✨",
+      "Kamu suka Ralyne juga ya? 💙",
+      "Dukung terus Ralyne ya 🌷",
+      "Ralyne selalu ceria ✨"
+    ]);
+  }
+
+  // ================= BASIC =================
+  if (text.includes("halo") || text.includes("hai") || text.includes("hi")) {
+    return "Hai juga! 🌷 Aku Ralyne A.I!";
+  }
+
+  if (text.includes("kabar")) {
+    return "Aku baik banget! Kamu gimana? 💙";
+  }
+
+  if (text.includes("makasih") || text.includes("terima kasih")) {
+    return "Sama-sama 💙";
+  }
+
+  if (text.includes("bye")) {
+    return "Bye-bye! 🌷";
+  }
+
+  return randomPick([
+    "Hehe aku belum ngerti 😅 tapi aku dengerin kok 💙",
+    "Ceritain lagi dong 🌸",
+    "Aku masih belajar 🤭",
+    "Menarik… lanjut dong ✨"
+  ]);
+}
+
+function tampilkanJawaban(res) {
+  const container = document.getElementById("chatOutput");
+
+  let html = "";
+
+  // ✅ kalau string biasa
+  if (typeof res === "string") {
+    html = `<p>${res}</p>`;
+  }
+
+  // ✅ kalau PAP (object)
+  else if (res.type === "pap") {
+    const imagesHTML = res.images.map(img => `
+      <img src="${img}" class="pap-img">
+    `).join("");
+
+    html = `
+      <p>${res.text}</p>
+      <div class="pap-grid">
+        ${imagesHTML}
+      </div>
+    `;
+  }
+
+  container.innerHTML += `<div class="ai-message">${html}</div>`;
+}
 
   // ================= SEND =================
   function sendMessage() {
@@ -2389,6 +2588,15 @@ setTimeout(() => {
   });
 
 });
+
+function quickChat(text) {
+  document.getElementById("chatInput").value = text;
+  
+  // 🔥 SEMBUNYIKAN QUICK CHAT
+  document.querySelector(".quick-chat-ai").style.display = "none";
+  
+  sendMessage();
+}
 </script>
 
 <script>
@@ -2446,20 +2654,6 @@ function addVoiceNote(src) {
   };
 }
 </script>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePopup()">✖</span>
-    
-    <img id="popup-img" src="" alt="event">
-
-    <h3 id="popup-title"></h3>
-    <p><strong>Waktu:</strong> <span id="popup-time"></span></p>
-    <p><strong>Tempat:</strong> <span id="popup-place"></span></p>
-    <p id="popup-desc"></p>
-  </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -2613,6 +2807,42 @@ function scrollToTop() {
   });
 }
 </script>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    
+    <span class="close-btn" onclick="closePopup()">✖</span>
+    
+    <img id="popup-img" src="" alt="event">
+
+    <h3 id="popup-title"></h3>
+
+    <div class="popup-info">
+      ⏰ <strong id="popup-time"></strong>
+    </div>
+
+    <div class="popup-info">
+      📍 <strong id="popup-place"></strong>
+    </div>
+
+    <p class="popup-desc" id="popup-desc"></p>
+
+    <!-- 🔥 TAMBAH DI SINI -->
+    <a id="popup-ticket" href="#" target="_blank" style="
+      display:none;
+      margin-top:15px;
+      background:#2b6cb0;
+      color:white;
+      padding:10px 15px;
+      border-radius:10px;
+      text-decoration:none;
+      display:inline-block;
+    ">
+      🎟️ Beli Tiket
+    </a>
+
+  </div>
+</div>
 
 </body>
 </html>
