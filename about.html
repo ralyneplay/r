@@ -173,6 +173,12 @@ body {
   border-radius: 15px;
 }
 
+.about {
+  position: relative;
+  z-index: 2;
+  background: #bfe4ff;
+}
+
 /* FOOTER */
 .footer {
   background: #ffd966;
@@ -203,13 +209,20 @@ body.menu-open {
   position: relative;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
 }
 
 .hero-video {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
+}
+
+.hero-overlay {
+  z-index: 2;
 }
 
 /* OVERLAY TEXT */
