@@ -323,17 +323,6 @@ body.menu-open {
   padding-left: 15px;
 }
 
-.bio:first-of-type::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 4px;
-  height: 70%;
-  background: #ffd966;
-  border-radius: 10px;
-}
-
 .about-box {
   animation: fadeUp 1s ease;
 }
@@ -361,9 +350,15 @@ body.menu-open {
   position: relative;
   width: 320px;
   height: 420px;
-  border-radius: 20px;
+  border-radius: 25px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+  border: 5px solid #ffd966;
+
+  box-shadow:
+  0 0 0 4px white,
+  0 10px 30px rgba(0,0,0,0.25),
+  0 0 20px rgba(255,217,102,0.6);
 }
 
 .video-slider video {
@@ -465,6 +460,59 @@ body.menu-open {
 .nav-btn:active{
   transform: scale(0.95);
 }
+
+.about-text{
+
+  background: white;
+  padding: 30px 35px;
+  border-radius: 60px;
+  max-width: 520px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,0.08),
+  0 0 0 10px rgba(255,255,255,0.3);
+
+  position: relative;
+}
+
+/* bentuk awan kiri */
+.about-text::before{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  background:white;
+  border-radius:50%;
+  top:-30px;
+  left:40px;
+  z-index:-1;
+}
+
+/* bentuk awan kanan */
+.about-text::after{
+  content:"";
+  position:absolute;
+  width:90px;
+  height:90px;
+  background:white;
+  border-radius:50%;
+  bottom:-20px;
+  right:60px;
+  z-index:-1;
+}
+
+.about-text h2{
+  font-size:28px;
+  color:#1a365d;
+  margin-bottom:15px;
+}
+
+.bio{
+  font-size:15px;
+  line-height:1.8;
+  color:#444;
+  margin-bottom:12px;
+}
 </style>
 </head>
 
@@ -532,7 +580,7 @@ body.menu-open {
 
 <!-- CONTENT -->
 <section class="about">
-  <h1>Tentang Ralyne</h1>
+  <h1>Tentang Ralyne (レリン)</h1>
   <p>Mengenal lebih dekat Ralyne ✨</p>
 
   <div class="about-box">
@@ -564,21 +612,28 @@ body.menu-open {
 
     <!-- TEXT -->
     <div class="about-text">
-      <h2>Ralyne van Irwan</h2>
 
-      <p class="bio">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      <h2 id="videoTitle">Announcement Gen 14</h2>
+
+      <p class="bio" id="videoText1">
+      Pada 14 Februari 2026, Ralyne pertama kali diperkenalkan kepada publik sebagai
+      bagian dari generasi ke-14 JKT48. Di atas panggung pertunjukan, ia tampil
+      dengan senyum yang sedikit gugup namun penuh semangat, menyapa para
+      penggemar yang hadir untuk pertama kalinya.
       </p>
 
-      <p class="bio">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      <p class="bio" id="videoText2">
+      Dalam perkenalan tersebut, Ralyne mengungkapkan bahwa ia berusia 14 tahun
+      dan berasal dari kota Medan. Dengan suara yang lembut, ia memperkenalkan
+      dirinya sambil membagikan sedikit tentang perjalanan yang membawanya
+      sampai ke panggung JKT48.
       </p>
 
-      <p class="bio">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore.
+      <p class="bio" id="videoText3">
+      Ia juga menyampaikan bahwa keputusannya bergabung dengan JKT48 adalah
+      untuk membanggakan kedua orang tuanya sekaligus mengejar cita-citanya
+      menjadi seorang idol. Momen ini menjadi langkah awal dari perjalanan
+      barunya di dunia hiburan.
       </p>
 
     </div>
@@ -641,9 +696,59 @@ setInterval(() => {
 </script>
 
 <script>
+
 let currentVideo = 0;
 const videos = document.querySelectorAll(".video-slider video");
 
+/* DATA TEKS SETIAP VIDEO */
+const videoData = [
+
+{
+title: "Announcement Gen 14",
+text1: "Pada 14 Februari 2026, Ralyne pertama kali diperkenalkan kepada publik sebagai bagian dari generasi ke-14 JKT48. Di atas panggung pertunjukan, ia tampil dengan senyum yang sedikit gugup namun penuh semangat, menyapa para penggemar yang hadir untuk pertama kalinya.",
+text2: "Dalam perkenalan tersebut, Ralyne mengungkapkan bahwa ia berusia 14 tahun dan berasal dari kota Medan. Dengan suara yang lembut, ia memperkenalkan dirinya sambil membagikan sedikit tentang perjalanan yang membawanya sampai ke panggung JKT48.",
+text3: "Ia menyampaikan bahwa bergabung dengan JKT48 adalah langkah untuk membanggakan kedua orang tuanya sekaligus mengejar cita-citanya menjadi seorang idol."
+},
+
+{
+title: "Hobi Ralyne: Game & Hair Styling",
+text1: "Pada 22 Februari 2026 di event JKT48 School, Ralyne mendapat kesempatan untuk memperkenalkan dirinya di hadapan para member dan penonton. Dalam sesi tersebut, Freya meminta Ralyne untuk menceritakan sedikit tentang dirinya sekaligus hobinya.",
+text2: "Dengan senyum yang ceria, Ralyne mengungkapkan bahwa ia memiliki dua hobi yang cukup ia sukai, yaitu bermain game dan melakukan hair styling. Jawaban itu langsung membuat suasana menjadi lebih hidup dan menarik perhatian semua yang mendengarkan.",
+text3: "Mendengar hal tersebut, Freya langsung memperjelas dengan mengatakan, 'Main FF ya? Free Fire.' Ralyne pun menanggapi dengan penuh semangat dengan memperagakan gerakan khas dari game tersebut, melakukan 'piw' sambil jumpshoot, yang membuat suasana menjadi semakin seru dan mengundang tawa."
+},
+
+{
+title: "Challenge MC: Event yang Terlambat",
+text1: "Pada 1 Maret 2026 di event JKT48 School, Ralyne mendapatkan sebuah challenge menarik dari Greesel. Dalam sesi tersebut, ia diminta untuk mencoba menjadi seorang MC dalam sebuah simulasi situasi yang tidak biasa.",
+text2: "Challenge yang diberikan cukup unik. Ralyne harus memandu acara seolah-olah sebuah event mengalami keterlambatan, sehingga ia perlu mengisi suasana sambil menenangkan penonton layaknya seorang MC profesional.",
+text3: "Dengan keberanian dan kepercayaan diri, Ralyne berhasil menjalankan peran tersebut dengan baik. Melihat penampilannya, Greesel pun memberikan pujian dengan mengatakan, 'Wow ini udah ada bakat JKT48 banget ya,' yang langsung membuat suasana menjadi semakin meriah."
+},
+
+{
+title: "Ralyne dan Jawaban Lucunya: Menjadi Monyet",
+text1: "Pada sesi kedua JKT48 School tanggal 1 Maret 2026, Ralyne kembali ikut dalam sebuah permainan tanya jawab yang dipandu oleh Muthe. Dalam sesi tersebut, Muthe memberikan pertanyaan sederhana namun cukup unik: 'What you are?'",
+text2: "Menanggapi pertanyaan itu, Ralyne menjawab dengan cara yang cukup menghibur. Ia mengatakan bahwa jika ia bisa menjadi seekor hewan, ia ingin menjadi monyet. Jawaban spontan tersebut langsung membuat suasana menjadi lebih hidup.",
+text3: "Ralyne kemudian menjelaskan alasannya dengan gaya yang lucu. Ia mengatakan bahwa monyet bisa melompat dari satu pohon ke pohon lainnya. Sambil memperagakan gerakan kecil, ia berkata 'piw' sambil melompat, yang langsung mengundang tawa dari semua yang melihatnya."
+},
+
+{
+title: "Ralyne Membawakan Aitakatta dengan Berbagai Ekspresi",
+text1: "Pada 8 Maret 2026, dalam sebuah challenge di event JKT48 School, Ralyne mendapat tantangan dari Atin dan Marsha untuk membawakan lagu Aitakatta dengan berbagai ekspresi yang berbeda.",
+text2: "Dalam challenge tersebut, Ralyne harus menyanyikan bagian dari lagu Aitakatta dengan beberapa ekspresi, mulai dari marah, sedih, penuh semangat, hingga memberikan 'waro' kepada para fans di teater. Tantangan ini membuat suasana menjadi semakin seru karena setiap ekspresi memberikan nuansa yang berbeda.",
+text3: "Saat membawakan bagian dengan ekspresi marah, Ralyne benar-benar mengeluarkan seluruh emosinya dengan sangat total. Penampilannya yang begitu serius justru membuat suasana satu teater pecah menjadi tawa karena ekspresi marahnya yang sangat kuat namun tetap menghibur."
+},
+
+{
+title: "Shonichi Jikoshoukai Ralyne di Teater JKT48",
+text1: "Pada 15 Maret 2026, dalam event terakhir JKT48 School, Ralyne akhirnya mendapat kesempatan untuk melakukan shonichi memperkenalkan jikoshoukai ia di Teater JKT48.",
+text2: "Di atas panggung, Ralyne memperkenalkan dirinya dengan kalimat jikoshoukai yang khas: 'Ready, set, go! Gameplay aku akan menghiburmu.' Perkenalan tersebut menjadi momen penting sebagai langkah awalnya tampil di hadapan para penggemar di teater.",
+text3: "Karena Ralyne berasal dari kota Medan, beberapa fans yang hadir di teater menyambutnya dengan teriakan 'Horas!' dari penonton. Momen tersebut membuat suasana menjadi hangat sekaligus menunjukkan dukungan para fans kepada Ralyne."
+}
+
+];
+
+
+/* FUNCTION GANTI VIDEO + TEKS */
 function showVideo(index){
 
   videos.forEach(v => {
@@ -654,9 +759,19 @@ function showVideo(index){
 
   videos[index].classList.add("active");
   videos[index].play();
+
+  /* GANTI TEKS */
+  document.getElementById("videoTitle").innerText = videoData[index].title;
+  document.getElementById("videoText1").innerText = videoData[index].text1;
+  document.getElementById("videoText2").innerText = videoData[index].text2;
+  document.getElementById("videoText3").innerText = videoData[index].text3;
+
 }
 
+
+/* NEXT VIDEO */
 function nextVideo(){
+
   currentVideo++;
 
   if(currentVideo >= videos.length){
@@ -664,9 +779,13 @@ function nextVideo(){
   }
 
   showVideo(currentVideo);
+
 }
 
+
+/* PREVIOUS VIDEO */
 function prevVideo(){
+
   currentVideo--;
 
   if(currentVideo < 0){
@@ -674,7 +793,13 @@ function prevVideo(){
   }
 
   showVideo(currentVideo);
+
 }
+
+
+/* LOAD PERTAMA */
+showVideo(currentVideo);
+
 </script>
 
 <script>
