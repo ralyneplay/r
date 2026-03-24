@@ -513,6 +513,138 @@ body.menu-open {
   color:#444;
   margin-bottom:12px;
 }
+
+/* SECTION */
+
+.ralyne-corner{
+padding:100px 10%;
+background:#bfe4ff;
+text-align:center;
+}
+
+/* JUDUL SECTION */
+
+.ralyne-corner h1{
+font-size:46px;
+color:#2b6cb0;
+}
+
+.ralyne-corner p{
+color:#333;
+margin-top:10px;
+}
+
+/* LAYOUT */
+
+.corner-layout{
+
+margin-top:70px;
+
+display:flex;
+justify-content:center;
+align-items:flex-start;
+
+gap:70px;
+flex-wrap:wrap;
+
+}
+
+/* CLOUD BOX */
+
+.cloud-box{
+
+background:white;
+
+padding:40px 35px;
+
+border-radius:60px;
+
+box-shadow:
+0 20px 40px rgba(0,0,0,0.15);
+
+position:relative;
+
+}
+
+/* FOTO BOX (LEBIH KECIL) */
+
+.corner-layout .cloud-box:first-child{
+width:320px;
+}
+
+/* VIDEO BOX (LEBIH BESAR) */
+
+.corner-layout .cloud-box:last-child{
+width:520px;
+}
+
+/* BENTUK AWAN */
+
+.cloud-box::before,
+.cloud-box::after{
+
+content:"";
+position:absolute;
+
+background:white;
+border-radius:50%;
+
+}
+
+.cloud-box::before{
+
+width:80px;
+height:80px;
+
+top:-30px;
+left:40px;
+
+}
+
+.cloud-box::after{
+
+width:60px;
+height:60px;
+
+top:-25px;
+right:60px;
+
+}
+
+/* TITLE DALAM AWAN */
+
+.cloud-box h3{
+margin-bottom:20px;
+color:#1a365d;
+font-weight:600;
+}
+
+/* FOTO */
+
+.kabesha-frame img{
+
+width:100%;
+border-radius:20px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.2);
+
+}
+
+/* VIDEO */
+
+.video-frame iframe{
+
+width:100%;
+height:300px;
+
+border-radius:20px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.2),
+0 0 25px rgba(120,200,255,0.5);
+
+}
 </style>
 </head>
 
@@ -639,6 +771,43 @@ body.menu-open {
     </div>
 
   </div>
+</section>
+
+<section class="ralyne-corner">
+
+<h1>Sky of Ralyne</h1>
+<p>Cerita kecil dari perjalanan Ralyne ✨</p>
+
+<div class="corner-layout">
+
+  <!-- FOTO -->
+  <div class="cloud-box">
+
+    <h3>Kabesha Ralyne</h3>
+
+    <div class="kabesha-frame">
+      <img src="kabesharalyne.jpg" alt="Kabesha Ralyne">
+    </div>
+
+  </div>
+
+  <!-- VIDEO -->
+  <div class="cloud-box">
+
+    <h3>Video Debut</h3>
+
+    <div class="video-frame">
+      <iframe
+      src="https://www.youtube.com/embed/NllA98IKA6U"
+      frameborder="0"
+      allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+
+</div>
+
 </section>
 
   <!-- FOOTER -->
