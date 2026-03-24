@@ -522,7 +522,7 @@ background:#bfe4ff;
 text-align:center;
 }
 
-/* JUDUL SECTION */
+/* ================= JUDUL SECTION ================= */
 
 .ralyne-corner h1{
 font-size:46px;
@@ -534,7 +534,7 @@ color:#333;
 margin-top:10px;
 }
 
-/* LAYOUT */
+/* ================= LAYOUT ================= */
 
 .corner-layout{
 
@@ -549,7 +549,7 @@ flex-wrap:wrap;
 
 }
 
-/* CLOUD BOX */
+/* ================= CLOUD BOX ================= */
 
 .cloud-box{
 
@@ -578,7 +578,7 @@ width:320px;
 width:520px;
 }
 
-/* BENTUK AWAN */
+/* ================= BENTUK AWAN ================= */
 
 .cloud-box::before,
 .cloud-box::after{
@@ -611,15 +611,17 @@ right:60px;
 
 }
 
-/* TITLE DALAM AWAN */
+/* ================= TITLE ================= */
 
 .cloud-box h3{
+
 margin-bottom:20px;
 color:#1a365d;
 font-weight:600;
+
 }
 
-/* FOTO */
+/* ================= FOTO ================= */
 
 .kabesha-frame img{
 
@@ -631,18 +633,47 @@ box-shadow:
 
 }
 
-/* VIDEO */
+/* ================= VIDEO ================= */
 
-.video-frame iframe{
-
+.video-frame{
+position:relative;
 width:100%;
-height:300px;
-
+padding-bottom:56.25%; /* rasio 16:9 */
+height:0;
+overflow:hidden;
 border-radius:20px;
 
 box-shadow:
 0 10px 25px rgba(0,0,0,0.2),
 0 0 25px rgba(120,200,255,0.5);
+}
+
+.video-frame iframe{
+
+position:absolute;
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+border-radius:20px;
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width:768px){
+
+.corner-layout{
+flex-direction:column;
+align-items:center;
+}
+
+.corner-layout .cloud-box:first-child,
+.corner-layout .cloud-box:last-child{
+width:100%;
+}
 
 }
 </style>
