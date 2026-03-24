@@ -549,11 +549,10 @@ flex-wrap:wrap;
 
 .cloud-box{
 background:white;
-padding:40px 35px;
+padding:60px 35px 40px; /* padding atas ditambah supaya teks tidak ketutup */
 border-radius:60px;
 box-shadow:0 20px 40px rgba(0,0,0,0.15);
 position:relative;
-z-index:1;
 }
 
 /* FOTO BOX */
@@ -576,23 +575,22 @@ content:"";
 position:absolute;
 background:white;
 border-radius:50%;
-z-index:-1;
 }
 
-/* BULATAN AWAN DIPERKECIL */
+/* awan dipindah lebih atas */
 
 .cloud-box::before{
-width:60px;
-height:60px;
-top:-25px;
-left:35px;
+width:70px;
+height:70px;
+top:-40px;
+left:50px;
 }
 
 .cloud-box::after{
-width:45px;
-height:45px;
-top:-20px;
-right:50px;
+width:55px;
+height:55px;
+top:-35px;
+right:70px;
 }
 
 /* ================= TITLE ================= */
@@ -645,35 +643,15 @@ align-items:center;
 gap:40px;
 }
 
-/* FOTO */
-
-.corner-layout .cloud-box:first-child{
-width:92%;
-}
-
-/* VIDEO BESAR */
-
+.corner-layout .cloud-box:first-child,
 .corner-layout .cloud-box:last-child{
-
-width:100%;
-
-padding:18px;
-
-border-radius:35px;
-
+width:95%;
 }
 
-/* HILANGKAN BULATAN AWAN DI VIDEO */
+/* video dibuat lebih tinggi */
 
-.corner-layout .cloud-box:last-child::before,
-.corner-layout .cloud-box:last-child::after{
-display:none;
-}
-
-/* VIDEO LEBIH BESAR */
-
-.corner-layout .cloud-box:last-child .video-frame{
-padding-bottom:80%;
+.video-frame{
+padding-bottom:75%;
 }
 
 }
