@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corner</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #bfe4ff;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.about{
+  flex:1;
+}
+
+/* ================= SUN MENU (SAMA PERSIS) ================= */
+
+.sun-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: #ffd966;
+  border-bottom-left-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.4s;
+  overflow: hidden;
+}
+
+/* MODE BULAN */
+.sun-menu.active {
+  background: #f5f1e6;
+}
+
+.sun-menu.active::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: #e8e2d3;
+  border-radius: 50%;
+  top: 20px;
+  right: 20px;
+  box-shadow: -25px 0 0 0 #f5f1e6;
+}
+
+/* TEXT */
+.sun-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  font-weight: 700;
+  color: #2b6cb0;
+  transform: rotate(-20deg);
+  transition: 0.3s;
+  font-size: 20px;
+  z-index: 2;
+}
+
+/* ================= MENU PANEL ================= */
+
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  z-index: 998;
+}
+
+/* NIGHT MODE */
+.menu-panel.active {
+  right: 0;
+  background: radial-gradient(circle at top, #1a1a2e, #0f172a);
+  overflow: hidden;
+}
+
+/* LINK */
+.menu-panel a {
+  font-size: 32px;
+  margin: 15px 0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+  position: relative;
+  z-index: 2;
+  color: #ffd966;
+}
+
+.menu-panel a:hover {
+  transform: scale(1.1);
+}
+
+/* ================= STARS ================= */
+
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.5); }
+}
+
+/* ================= CONTENT ================= */
+
+.about {
+  padding: 120px 10% 80px;
+  text-align: justify;
+}
+
+.about h1,
+.about h2{
+  text-align:center;
+}
+
+.about h1 {
+  font-size: 48px;
+  color: #2b6cb0;
+}
+
+.about p {
+  margin-top: 10px;
+  color: #444;
+}
+
+/* BOX */
+.about-box {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about-img img {
+  width: 260px;
+  border-radius: 20px;
+}
+
+.about-text {
+  text-align: left;
+}
+
+.info {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* FOOTER */
+.footer {
+  background: #ffd966;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #1a365d;
+}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+  .about-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* HERO VIDEO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* OVERLAY TEXT */
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.hero-overlay h1 {
+  font-size: 48px;
+  background: rgba(0,0,0,0.4);
+  padding: 15px 25px;
+  border-radius: 15px;
+}
+
+.hero-overlay p {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* DARK OVERLAY */
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.3);
+}
+
+.transport-menu{
+  margin-top:40px;
+}
+
+.transport-menu button{
+  margin:8px;
+  padding:10px 18px;
+  border:none;
+  border-radius:10px;
+  background:#2b6cb0;
+  color:white;
+  cursor:pointer;
+}
+
+.route-content{
+  margin-top:40px;
+}
+
+.route-box{
+  display:none;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin-top:20px;
+}
+
+.airport-box{
+  display:none;
+  margin-top:20px;
+  padding:15px;
+  background:#f4f8ff;
+  border-radius:10px;
+}
+
+.transport-menu{
+  margin-top:40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+
+.transport-menu button{
+  padding:12px 20px;
+  border:none;
+  border-radius:12px;
+  background:white;
+  color:#2b6cb0;
+  font-weight:500;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  transition:all 0.25s ease;
+}
+
+.transport-menu button:hover{
+  transform:translateY(-3px);
+  background:#2b6cb0;
+  color:white;
+}
+
+.route-box{
+  display:none;
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  margin-top:25px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  line-height:1.7;
+}
+
+.airport-box{
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  background:#f8fbff;
+  border-radius:12px;
+
+  border:1px solid rgba(0,0,0,0.05);
+}
+
+.route-box button{
+  margin-top:10px;
+  margin-right:10px;
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:#2b6cb0;
+  color:white;
+  cursor:pointer;
+}
+
+.center-text{
+  text-align:center;
+}
+
+/* ================= FX VIRTUAL TOUR ================= */
+
+.fx-virtual{
+  max-width:900px;
+  margin:40px auto;
+  position:relative;
+}
+
+.fx-scene{
+  display:none;
+  position:relative;
+  animation:fadeScene 0.5s;
+}
+
+.fx-scene.active{
+  display:block;
+}
+
+.fx-img{
+  width:100%;
+  border-radius:18px;
+}
+
+/* HOTSPOT */
+
+.fx-hotspot{
+  position:absolute;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+
+  border:4px solid white;   /* ring donat */
+  background:transparent;
+
+  transform:translate(-50%,-50%);
+  cursor:pointer;
+
+  animation:hotspotPulse 1.5s infinite;
+}
+
+@keyframes hotspotPulse{
+  0%{
+    transform:translate(-50%,-50%) scale(1);
+    opacity:0.7;
+  }
+  50%{
+    transform:translate(-50%,-50%) scale(1.4);
+    opacity:1;
+  }
+  100%{
+    transform:translate(-50%,-50%) scale(1);
+    opacity:0.7;
+  }
+}
+
+@keyframes fadeScene{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+/* BUTTON NAV */
+
+.fx-nav{
+  margin-top:20px;
+  text-align:center;
+}
+
+.fx-nav button{
+  padding:10px 18px;
+  margin:5px;
+  border:none;
+  border-radius:10px;
+  background:#2b6cb0;
+  color:white;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.fx-nav button:hover{
+  transform:scale(1.05);
+  background:#1f4f86;
+}
+.fx-scene{
+  position:relative;
+  padding:40px 30px 30px;
+  background:white;   /* ubah jadi putih */
+  border-radius:40px;
+}
+
+/* awan kiri */
+.fx-scene::before{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:80px;
+  background:white;   /* ubah jadi putih */
+  border-radius:50%;
+  top:-40px;
+  left:60px;
+}
+
+/* awan kanan */
+.fx-scene::after{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:80px;
+  background:white;   /* ubah jadi putih */
+  border-radius:50%;
+  top:-40px;
+  right:60px;
+}
+
+/* ICON TANDA SERU */
+
+.fx-info{
+  position:absolute;
+  top:68%;
+  left:50%;
+
+  width:28px;
+  height:28px;
+
+  border-radius:50%;
+
+  background:rgba(43,108,176,0.9);
+  color:white;
+
+  border:2px solid rgba(255,255,255,0.7);
+
+  font-weight:bold;
+  font-size:16px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  transform:translate(-50%,-50%);
+  transition:0.25s;
+
+  z-index:5; /* penting */
+}
+
+/* HOVER ICON */
+
+.fx-info:hover{
+  background:rgba(43,108,176,0.75); /* sedikit lebih transparan */
+  border:2px solid rgba(255,255,255,0.9);
+
+  transform:translate(-50%,-50%) scale(1.1);
+}
+
+
+/* TOOLTIP MINI FACT */
+
+.fx-tooltip{
+  position:absolute;
+  bottom:45px;
+  left:50%;
+  transform:translateX(-50%);
+
+  background:rgba(255,255,255,0.95); /* putih sedikit transparan */
+  color:#1a365d; /* teks biru tua biar kebaca */
+
+  padding:12px 15px;
+
+  border-radius:12px;
+  font-size:14px;
+  line-height:1.5;
+
+  width:200px;
+
+  border:2px solid rgba(43,108,176,0.25);
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+}
+
+/* judul Mini Fact */
+
+.fx-tooltip b{
+  color:#2b6cb0;
+  font-size:15px;
+}
+
+/* MUNCUL SAAT HOVER */
+
+.fx-info:hover .fx-tooltip{
+  opacity:1;
+}
+
+.fx-ui{
+  margin-top:20px;
+  text-align:center;
+}
+
+.fx-text{
+  font-size:16px;
+  color:#1a365d;
+  margin-bottom:12px;
+}
+
+.fx-nav{
+  text-align:center;
+}
+
+.fx-nav button{
+  padding:10px 18px;
+  margin:5px;
+  border:none;
+  border-radius:10px;
+  background:#2b6cb0;
+  color:white;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.fx-nav button:hover{
+  transform:scale(1.05);
+  background:#1f4f86;
+}
+
+.fx-text{
+text-align:center;
+margin-top:13px;
+font-size:14px;
+color:#1a365d;
+}
+
+.fx-photo{
+position:relative;
+width:100%;
+}
+
+.fx-img{
+width:100%;
+display:block;
+}
+
+.fx-hotspot{
+position:absolute;
+transform:translate(-50%,-50%);
+}
+</style>
+</head>
+
+<body>
+
+<!-- SUN MENU -->
+<div class="sun-menu" id="sun" onclick="toggleMenu()">
+  <div class="sun-text" id="sunText">
+    <span>ME</span>
+    <span>NU</span>
+  </div>
+</div>
+
+<!-- MENU PANEL -->
+<div class="menu-panel" id="menu">
+
+  <!-- STARS -->
+  <div class="stars">
+    <div class="star" style="top:10%; left:20%;"></div>
+    <div class="star" style="top:30%; left:70%;"></div>
+    <div class="star" style="top:50%; left:40%;"></div>
+    <div class="star" style="top:70%; left:80%;"></div>
+    <div class="star" style="top:20%; left:90%;"></div>
+    <div class="star" style="top:80%; left:10%;"></div>
+    <div class="star" style="top:60%; left:60%;"></div>
+    <div class="star" style="top:40%; left:15%;"></div>
+  </div>
+
+  <a href="index.html">Home</a>
+  <a href="about.html">Tentang Ralyne</a>
+  <a href="corner.html">Corner</a>
+</div>
+
+<section class="about">
+
+<h1>Kabesha Ralyne Virtual</h1>
+<p class="center-text">Explore Kabesha Ralyne✨</p>
+
+<div class="fx-virtual">
+
+<!-- SCENE 0 -->
+<div class="fx-scene active">
+
+<div class="fx-photo">
+<img src="fx1.jpg" class="fx-img">
+<div class="fx-hotspot" style="top:70%;left:60%;" onclick="goScene(1)"></div>
+</div>
+
+<p class="fx-text">Klik lingkaran untuk menjelajah</p>
+
+<div class="fx-nav">
+<button onclick="prevScene()">Prev</button>
+<button onclick="nextScene()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SCENE 1 -->
+<div class="fx-scene">
+
+<div class="fx-photo">
+<img src="fx2.jpeg" class="fx-img">
+
+<div class="fx-hotspot" style="top:50%;left:15%;" onclick="goScene(2)"></div>
+<div class="fx-hotspot" style="top:50%;left:70%;" onclick="goScene(3)"></div>
+</div>
+
+<p class="fx-text">
+Kamu bisa menggunakan lift atau eskalator.<br>
+Lift berada di kanan, eskalator di kiri.
+</p>
+
+<div class="fx-nav">
+<button onclick="prevScene()">Prev</button>
+<button onclick="nextScene()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SCENE 2 -->
+<div class="fx-scene">
+
+<div class="fx-photo">
+<img src="fx31.jpg" class="fx-img">
+<div class="fx-hotspot" style="top:60%;left:50%;" onclick="goScene(4)"></div>
+</div>
+
+<p class="fx-text">Naiklah sampai lantai F4</p>
+
+<div class="fx-nav">
+<button onclick="prevScene()">Prev</button>
+<button onclick="nextScene()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SCENE 3 -->
+<div class="fx-scene">
+
+<div class="fx-photo">
+<img src="fx3.jpeg" class="fx-img">
+<div class="fx-hotspot" style="top:60%;left:50%;" onclick="goScene(4)"></div>
+</div>
+
+<p class="fx-text">Naiklah sampai lantai F4</p>
+
+<div class="fx-nav">
+<button onclick="prevScene()">Prev</button>
+<button onclick="nextScene()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SCENE 4 -->
+<div class="fx-scene">
+
+<div class="fx-photo">
+<img src="fx4.jpeg" class="fx-img">
+<div class="fx-hotspot" style="top:50%;left:65%;" onclick="goScene(5)"></div>
+</div>
+
+<p class="fx-text">Pergilah ke depan teater JKT48</p>
+
+<div class="fx-nav">
+<button onclick="prevScene()">Prev</button>
+<button onclick="nextScene()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SCENE 5 -->
+<div class="fx-scene">
+
+<div class="fx-photo">
+<img src="fx5.jpg" class="fx-img">
+
+<div class="fx-info">
+!
+<div class="fx-tooltip">
+<b>Mini Fact</b><br>
+Nama: Ralyne van Irwan<br>
+Lahir: 15 Oktober 2011<br>
+Asal: Medan<br>
+Tinggi: 152 cm
+</div>
+</div>
+
+</div>
+
+<p class="fx-text">Kamu sudah sampai di Kabesha Ralyne ✨</p>
+
+<div class="fx-nav">
+<button onclick="prevScene()">Prev</button>
+<button onclick="nextScene()">Next</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Copyright © 2026 Ralyne Play • All Rights Reserved</p>
+  </footer>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  const sun = document.getElementById("sun");
+  const text = document.getElementById("sunText");
+
+  menu.classList.toggle("active");
+  sun.classList.toggle("active");
+
+  document.body.classList.toggle("menu-open");
+
+  if (menu.classList.contains("active")) {
+    text.innerHTML = "<span>CLO</span><span>SE</span>";
+  } else {
+    text.innerHTML = "<span>ME</span><span>NU</span>";
+  }
+}
+</script>
+
+<script>
+
+let sceneIndex = 0;
+let historyStack = [];
+
+const scenes = document.querySelectorAll(".fx-scene");
+
+const prevBtn = document.querySelector(".fx-nav button:first-child");
+const nextBtn = document.querySelector(".fx-nav button:last-child");
+
+/* peta next scene */
+const nextMap = {
+  0:1, // fx1 → fx2
+  1:3, // fx2 → fx3
+  2:4, // fx31 → fx4
+  3:4, // fx3 → fx4
+  4:5  // fx4 → fx5
+};
+
+function updateButtons(){
+
+  const activeScene = scenes[sceneIndex];
+
+  const prevBtn = activeScene.querySelector(".fx-nav button:first-child");
+  const nextBtn = activeScene.querySelector(".fx-nav button:last-child");
+
+  /* prev hilang di scene pertama */
+  if(sceneIndex === 0){
+    prevBtn.style.display = "none";
+  } else {
+    prevBtn.style.display = "inline-block";
+  }
+
+  /* next hilang di scene terakhir */
+  if(sceneIndex === scenes.length - 1){
+    nextBtn.style.display = "none";
+  } else {
+    nextBtn.style.display = "inline-block";
+  }
+
+}
+
+function showScene(i){
+
+  scenes.forEach(scene=>{
+    scene.classList.remove("active");
+  });
+
+  scenes[i].classList.add("active");
+
+  updateButtons();
+
+}
+
+function goScene(i){
+
+  historyStack.push(sceneIndex);
+  sceneIndex = i;
+
+  showScene(sceneIndex);
+
+}
+
+function nextScene(){
+
+  /* kalau sudah scene terakhir, tidak melakukan apa-apa */
+  if(nextMap[sceneIndex] === undefined) return;
+
+  historyStack.push(sceneIndex);
+  sceneIndex = nextMap[sceneIndex];
+
+  showScene(sceneIndex);
+
+}
+
+function prevScene(){
+
+  if(historyStack.length > 0){
+
+    sceneIndex = historyStack.pop();
+    showScene(sceneIndex);
+
+  }
+
+}
+
+showScene(sceneIndex);
+
+</script>
+
+</body>
+</html>
