@@ -816,6 +816,27 @@ transform:translate(-50%,-50%);
 .ishou-arrow.right{
   right:-40px;
 }
+
+/* PANAH RESPONSIVE */
+@media (max-width: 600px) {
+  .ishou-arrow.left {
+    left: -10px; /* lebih dekat ke border kiri */
+    width:30px;  /* lebih kecil supaya tidak kebesaran di HP */
+    height:30px;
+    font-size:18px;
+  }
+
+  .ishou-arrow.right {
+    right: -10px; /* lebih dekat ke border kanan */
+    width:30px;
+    height:30px;
+    font-size:18px;
+  }
+}
+
+.ishou-arrow {
+  padding:5px; /* area klik lebih luas, tapi visual tetap kecil */
+}
 </style>
 </head>
 
