@@ -603,6 +603,219 @@ display:block;
 position:absolute;
 transform:translate(-50%,-50%);
 }
+
+/* ================= ISHOU RECAP ================= */
+
+.ishou-box{
+  margin-top:40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.ishou-item{
+  width:200px;
+  background:white;
+  padding:15px;
+  border-radius:18px;
+  text-align:center;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+  transition:0.25s;
+}
+
+.ishou-item:hover{
+  transform:translateY(-5px);
+}
+
+.ishou-item img{
+  width:100%;
+  border-radius:12px;
+}
+
+.ishou-item p{
+  margin-top:10px;
+  font-size:14px;
+  color:#1a365d;
+}
+
+/* ================= ISHOU RECAP ================= */
+
+.ishou-title{
+  margin-top:80px;
+  text-align:center;
+  font-size:36px;
+  color:#2b6cb0;
+}
+
+.ishou-box{
+  margin-top:40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:25px;
+}
+
+.ishou-item{
+  width:260px; /* diperbesar */
+  background:white;
+  padding:18px;
+  border-radius:20px;
+  text-align:center;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.25s;
+}
+
+.ishou-item:hover{
+  transform:translateY(-6px);
+}
+
+.ishou-item img{
+  width:100%;
+  border-radius:14px;
+}
+
+.ishou-item p{
+  margin-top:12px;
+  font-size:15px;
+  color:#2b6cb0; /* teks biru */
+  font-weight:500;
+}
+
+/* ================= ISHOU SLIDER ================= */
+
+.ishou-title{
+  margin-top:80px;
+  text-align:center;
+  font-size:36px;
+  color:#2b6cb0;
+}
+
+.ishou-slider{
+  max-width:500px;
+  margin:40px auto;
+  text-align:center;
+}
+
+.ishou-slide{
+  display:none;
+  background:white;
+  padding:25px;
+  border-radius:20px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.ishou-slide.active{
+  display:block;
+}
+
+.ishou-slide img{
+  width:100%;
+  border-radius:15px;
+}
+
+.ishou-slide p{
+  margin-top:12px;
+  font-size:16px;
+  color:#2b6cb0;
+  font-weight:500;
+}
+
+.ishou-nav{
+  margin-top:15px;
+}
+
+.ishou-nav button{
+  padding:10px 18px;
+  margin:5px;
+  border:none;
+  border-radius:10px;
+  background:#2b6cb0;
+  color:white;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.ishou-nav button:hover{
+  transform:scale(1.05);
+  background:#1f4f86;
+}
+
+/* ================= ISHOU SLIDER ================= */
+
+.ishou-title{
+  margin-top:80px;
+  text-align:center;
+  font-size:36px;
+  color:#2b6cb0;
+}
+
+.ishou-slider{
+  max-width:500px;
+  margin:40px auto;
+  text-align:center;
+  position:relative;
+}
+
+.ishou-slide{
+  display:none;
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.ishou-slide.active{
+  display:block;
+}
+
+.ishou-slide img{
+  width:100%;
+  border-radius:15px;
+}
+
+.ishou-slide p{
+  margin-top:12px;
+  font-size:15px;
+  color:#444; /* abu abu seperti section sebelumnya */
+}
+
+/* PANAH */
+
+.ishou-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:20px;
+  color:#2b6cb0;
+  background:white;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  transition:0.25s;
+}
+
+.ishou-arrow:hover{
+  transform:translateY(-50%) scale(1.1);
+}
+
+.ishou-arrow.left{
+  left:-40px;
+}
+
+.ishou-arrow.right{
+  right:-40px;
+}
 </style>
 </head>
 
@@ -768,6 +981,41 @@ Tinggi: 152 cm
 
 </div>
 
+<h2 class="ishou-title">Ralyne Ishou / Seifuku Recap</h2>
+<p class="center-text">Beberapa kostum yang pernah dipakai Ralyne ✨</p>
+
+<div class="ishou-slider">
+
+<div class="ishou-arrow left" onclick="prevIshou()">❮</div>
+<div class="ishou-arrow right" onclick="nextIshou()">❯</div>
+
+<div class="ishou-slide active">
+<img src="ishou1.jpg">
+<p>Kiss Datte Hidarikiki / Iclub48</p>
+</div>
+
+<div class="ishou-slide">
+<img src="ishou2.jpg">
+<p>JKT48 School</p>
+</div>
+
+<div class="ishou-slide">
+<img src="ishou3.jpg">
+<p>JKT48 Gen 14 T-Shirt</p>
+</div>
+
+<div class="ishou-slide">
+<img src="ishou4.jpg">
+<p>Mirai ga Me ni Shimiru</p>
+</div>
+
+<div class="ishou-slide">
+<img src="ishou5.jpg">
+<p>Red Black</p>
+</div>
+
+</div>
+
 </section>
 
   <!-- FOOTER -->
@@ -882,6 +1130,47 @@ function prevScene(){
 
 showScene(sceneIndex);
 
+</script>
+
+<script>
+let ishouIndex = 0;
+const ishouSlides = document.querySelectorAll(".ishou-slide");
+
+function showIshou(i){
+
+ishouSlides.forEach(slide=>{
+slide.classList.remove("active");
+});
+
+ishouSlides[i].classList.add("active");
+
+}
+
+function nextIshou(){
+
+ishouIndex++;
+
+if(ishouIndex >= ishouSlides.length){
+ishouIndex = 0;
+}
+
+showIshou(ishouIndex);
+
+}
+
+function prevIshou(){
+
+ishouIndex--;
+
+if(ishouIndex < 0){
+ishouIndex = ishouSlides.length - 1;
+}
+
+showIshou(ishouIndex);
+
+}
+
+showIshou(ishouIndex);
 </script>
 
 </body>
