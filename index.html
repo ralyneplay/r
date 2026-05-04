@@ -164,16 +164,15 @@
   padding: 80px 10%;
   min-height: 100vh;
 
-  position: relative;
-  overflow: hidden;
-  overflow-x: hidden; /* 🔥 fix tambahan */
+  position: relative;   /* 🔥 penting buat awan */
+  overflow: hidden;     /* biar awan gak keluar */
 }
 
 /* ================= TEXT ================= */
 
 .hero-text {
   position: relative;
-  z-index: 5;
+  z-index: 5; /* paling atas */
   color: #2b6cb0;
 }
 
@@ -204,13 +203,13 @@
   background: #1a4f85;
 }
 
-/* ================= HERO VIDEO ================= */
+/* ================= HERO VIDEO (TIDAK DIUBAH) ================= */
 
 .hero-img {
   position: relative;
   width: 380px;
   height: 500px;
-  z-index: 3;
+  z-index: 3; /* di atas awan */
 }
 
 .blob {
@@ -241,21 +240,17 @@
   animation: blobAnim 8s ease-in-out infinite;
 }
 
-/* 🔥 FIX UTAMA DISINI */
 .shape-outline {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  width: 105%;
+  height: 105%;
+  top: -10px;
+  left: -10px;
   z-index: 3;
   pointer-events: none;
-
   border: 3px dashed #ffd966;
   border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
   animation: blobAnim 8s ease-in-out infinite;
-
-  transform: scale(1.05); /* 🔥 ganti dari width 105% */
 }
 
 @keyframes blobAnim {
@@ -264,14 +259,13 @@
   100% { border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%; }
 }
 
-/* ================= CLOUD ================= */
+/* ================= CLOUD (INI YANG DIPERBAIKI) ================= */
 
 .cloud {
   position: absolute;
-  z-index: 1;
+  z-index: 1; /* 🔥 DI BAWAH SEMUA */
   opacity: 0.7;
   pointer-events: none;
-  max-width: 100%; /* 🔥 safety */
 }
 
 /* ================= BUBBLES ================= */
@@ -281,15 +275,14 @@
   border-radius: 50%;
   opacity: 0.5;
   animation: float 5s ease-in-out infinite;
-  z-index: 2;
+  z-index: 2; /* di atas awan */
 }
 
-/* 🔥 posisi kanan diperkecil biar aman */
 .bubble1 { width: 90px; height: 90px; background: #ffd966; top: 120px; left: 8%; }
 .bubble2 { width: 40px; height: 40px; background: white; top: 250px; left: 35%; animation-delay: 1s; }
-.bubble3 { width: 60px; height: 60px; background: #2b6cb0; bottom: 120px; right: 10%; animation-delay: 2s; }
+.bubble3 { width: 60px; height: 60px; background: #2b6cb0; bottom: 120px; right: 18%; animation-delay: 2s; }
 .bubble4 { width: 35px; height: 35px; background: white; bottom: 200px; left: 25%; animation-delay: 1.5s; }
-.bubble5 { width: 50px; height: 50px; background: #ffd966; top: 180px; right: 5%; animation-delay: 2.5s; }
+.bubble5 { width: 50px; height: 50px; background: #ffd966; top: 180px; right: 12%; animation-delay: 2.5s; }
 
 @keyframes float {
   0% { transform: translateY(0px); }
@@ -305,7 +298,6 @@
   height: 150px;
   margin-top: -80px;
   z-index: 5;
-  overflow: hidden; /* 🔥 tambahan */
 }
 
 .ground {
@@ -341,43 +333,40 @@
 .tree2 { left: 45%; transform: scale(1.2); }
 .tree3 { right: 15%; }
 
-/* ================= SECTION ================= */
+    /* SECTION */
+    .section1 {
+      background: #f4fff7;
+      padding: 100px 10%;
+      text-align: center;
+    }
 
-.section1 {
-  background: #f4fff7;
-  padding: 100px 10%;
-  text-align: center;
-}
+    .section1 h2 {
+      font-size: 40px;
+      color: #2b6cb0;
+    }
 
-.section1 h2 {
-  font-size: 40px;
-  color: #2b6cb0;
-}
+    .section1 p {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #444;
+    }
 
-.section1 p {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #444;
-}
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
 
-/* ================= MOBILE ================= */
+      .hero-img {
+        width: 260px;
+        height: 340px;
+        margin-top: 30px;
+      }
 
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-img {
-    width: 260px;
-    height: 340px;
-    margin-top: 30px;
-  }
-
-  .hero-text h1 {
-    font-size: 42px;
-  }
-}
+      .hero-text h1 {
+        font-size: 42px;
+      }
+    }
 
 /* ================= BIO SECTION ================= */
 
@@ -1802,17 +1791,17 @@ body.menu-open .scroll-top {
 /* arah terbang */
 @keyframes fly1 {
   from { transform: translateX(0); }
-  to { transform: translateX(120vw); }
+  to { transform: translateX(120%); }
 }
 
 @keyframes fly2 {
   from { transform: translateX(0); }
-  to { transform: translateX(130vw); }
+  to { transform: translateX(130%); }
 }
 
 @keyframes fly3 {
   from { transform: translateX(0); }
-  to { transform: translateX(110vw); }
+  to { transform: translateX(110%); }
 }
 
 /* ================= KEPAK SAYAP ================= */
@@ -2955,16 +2944,19 @@ html, body {
   <div class="bubble bubble4"></div>
   <div class="bubble bubble5"></div>
 
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
-<div class="cloud cloud3"></div>
-
-  <div class="bird bird1"></div>
-  <div class="bird bird2"></div>
-  <div class="bird bird3"></div>
-
   <!-- HERO -->
   <section class="hero">
+  <!-- 🔥 TAMBAHAN DI SINI -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+
+  <div class="birds">
+    <div class="bird bird1"></div>
+    <div class="bird bird2"></div>
+    <div class="bird bird3"></div>
+  </div>
+
     <div class="hero-text">
 <h1>
   Welcome to 
