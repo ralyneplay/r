@@ -4365,52 +4365,20 @@ window.addEventListener("resize", updateGallery);
 let currentIndex = 0;
 let galleryImages = [];
 
-function openLightbox(index) {
-  const visibleItems = document.querySelectorAll(".gallery-item:not(.hide)");
-  galleryImages = Array.from(visibleItems);
-
-  currentIndex = index;
-
-  document.getElementById("lightbox").style.display = "flex";
-  updateLightbox();
-}
-
-function closeLightbox() {
-  document.getElementById("lightbox").style.display = "none";
-}
-
-function updateLightbox() {
-  const img = document.getElementById("lightbox-img");
-  img.src = galleryImages[currentIndex].src;
-}
-
-function nextSlide() {
-  currentIndex = (currentIndex + 1) % galleryImages.length;
-  updateLightbox();
-}
-
-function prevSlide() {
-  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-  updateLightbox();
-}
-</script>
-
-<script>
-let currentIndex = 0;
-let galleryImages = [];
-
-// ambil semua gambar sekali
 function initGallery() {
   galleryImages = Array.from(document.querySelectorAll(".gallery-item"));
 
   galleryImages.forEach((img, index) => {
-    img.addEventListener("click", () => openLightbox(index));
+    img.style.cursor = "pointer"; // biar keliatan bisa diklik
+
+    img.onclick = () => {
+      openLightbox(index);
+    };
   });
 }
 
 function openLightbox(index) {
   currentIndex = index;
-
   document.getElementById("lightbox").style.display = "flex";
   updateLightbox();
 }
@@ -4420,8 +4388,8 @@ function closeLightbox() {
 }
 
 function updateLightbox() {
-  const img = document.getElementById("lightbox-img");
-  img.src = galleryImages[currentIndex].src;
+  document.getElementById("lightbox-img").src =
+    galleryImages[currentIndex].src;
 }
 
 function nextSlide() {
@@ -4430,28 +4398,13 @@ function nextSlide() {
 }
 
 function prevSlide() {
-  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+  currentIndex =
+    (currentIndex - 1 + galleryImages.length) % galleryImages.length;
   updateLightbox();
 }
 
-/* SWIPE MOBILE */
-let startX = 0;
-
-const lightbox = document.getElementById("lightbox");
-
-lightbox.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
-
-lightbox.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
-
-  if (startX - endX > 50) nextSlide();
-  if (endX - startX > 50) prevSlide();
-});
-
-/* INIT */
-window.addEventListener("load", initGallery);
+/* 🔥 INIT PALING AMAN */
+document.addEventListener("DOMContentLoaded", initGallery);
 </script>
 
 <div class="popup" id="popup">
