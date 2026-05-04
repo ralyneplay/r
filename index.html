@@ -164,15 +164,16 @@
   padding: 80px 10%;
   min-height: 100vh;
 
-  position: relative;   /* 🔥 penting buat awan */
-  overflow: hidden;     /* biar awan gak keluar */
+  position: relative;
+  overflow: hidden;
+  overflow-x: hidden; /* 🔥 fix tambahan */
 }
 
 /* ================= TEXT ================= */
 
 .hero-text {
   position: relative;
-  z-index: 5; /* paling atas */
+  z-index: 5;
   color: #2b6cb0;
 }
 
@@ -203,13 +204,13 @@
   background: #1a4f85;
 }
 
-/* ================= HERO VIDEO (TIDAK DIUBAH) ================= */
+/* ================= HERO VIDEO ================= */
 
 .hero-img {
   position: relative;
   width: 380px;
   height: 500px;
-  z-index: 3; /* di atas awan */
+  z-index: 3;
 }
 
 .blob {
@@ -240,17 +241,21 @@
   animation: blobAnim 8s ease-in-out infinite;
 }
 
+/* 🔥 FIX UTAMA DISINI */
 .shape-outline {
   position: absolute;
-  width: 105%;
-  height: 105%;
-  top: -10px;
-  left: -10px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   z-index: 3;
   pointer-events: none;
+
   border: 3px dashed #ffd966;
   border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%;
   animation: blobAnim 8s ease-in-out infinite;
+
+  transform: scale(1.05); /* 🔥 ganti dari width 105% */
 }
 
 @keyframes blobAnim {
@@ -259,13 +264,14 @@
   100% { border-radius: 42% 58% 55% 45% / 45% 40% 60% 55%; }
 }
 
-/* ================= CLOUD (INI YANG DIPERBAIKI) ================= */
+/* ================= CLOUD ================= */
 
 .cloud {
   position: absolute;
-  z-index: 1; /* 🔥 DI BAWAH SEMUA */
+  z-index: 1;
   opacity: 0.7;
   pointer-events: none;
+  max-width: 100%; /* 🔥 safety */
 }
 
 /* ================= BUBBLES ================= */
@@ -275,14 +281,15 @@
   border-radius: 50%;
   opacity: 0.5;
   animation: float 5s ease-in-out infinite;
-  z-index: 2; /* di atas awan */
+  z-index: 2;
 }
 
+/* 🔥 posisi kanan diperkecil biar aman */
 .bubble1 { width: 90px; height: 90px; background: #ffd966; top: 120px; left: 8%; }
 .bubble2 { width: 40px; height: 40px; background: white; top: 250px; left: 35%; animation-delay: 1s; }
-.bubble3 { width: 60px; height: 60px; background: #2b6cb0; bottom: 120px; right: 18%; animation-delay: 2s; }
+.bubble3 { width: 60px; height: 60px; background: #2b6cb0; bottom: 120px; right: 10%; animation-delay: 2s; }
 .bubble4 { width: 35px; height: 35px; background: white; bottom: 200px; left: 25%; animation-delay: 1.5s; }
-.bubble5 { width: 50px; height: 50px; background: #ffd966; top: 180px; right: 12%; animation-delay: 2.5s; }
+.bubble5 { width: 50px; height: 50px; background: #ffd966; top: 180px; right: 5%; animation-delay: 2.5s; }
 
 @keyframes float {
   0% { transform: translateY(0px); }
@@ -298,6 +305,7 @@
   height: 150px;
   margin-top: -80px;
   z-index: 5;
+  overflow: hidden; /* 🔥 tambahan */
 }
 
 .ground {
@@ -333,40 +341,43 @@
 .tree2 { left: 45%; transform: scale(1.2); }
 .tree3 { right: 15%; }
 
-    /* SECTION */
-    .section1 {
-      background: #f4fff7;
-      padding: 100px 10%;
-      text-align: center;
-    }
+/* ================= SECTION ================= */
 
-    .section1 h2 {
-      font-size: 40px;
-      color: #2b6cb0;
-    }
+.section1 {
+  background: #f4fff7;
+  padding: 100px 10%;
+  text-align: center;
+}
 
-    .section1 p {
-      margin-top: 10px;
-      font-size: 18px;
-      color: #444;
-    }
+.section1 h2 {
+  font-size: 40px;
+  color: #2b6cb0;
+}
 
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
+.section1 p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #444;
+}
 
-      .hero-img {
-        width: 260px;
-        height: 340px;
-        margin-top: 30px;
-      }
+/* ================= MOBILE ================= */
 
-      .hero-text h1 {
-        font-size: 42px;
-      }
-    }
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-img {
+    width: 260px;
+    height: 340px;
+    margin-top: 30px;
+  }
+
+  .hero-text h1 {
+    font-size: 42px;
+  }
+}
 
 /* ================= BIO SECTION ================= */
 
@@ -2801,6 +2812,109 @@ body.menu-open .scroll-top {
 .gallery-toggle:hover {
   background: #1a4f85;
 }
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* ================= GLOBAL FIX ================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ================= LIGHTBOX ================= */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.9);
+  z-index: 9999;
+
+  overflow: hidden;
+}
+
+/* GAMBAR */
+.lightbox img {
+  max-width: 95vw;
+  max-height: 80vh;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+  border-radius: 15px;
+
+  transition: 0.3s ease;
+}
+
+/* CLOSE */
+.lightbox .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* NAV BUTTON */
+.lightbox .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  font-size: 18px;
+
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.lightbox .prev { left: 10px; }
+.lightbox .next { right: 10px; }
+
+.lightbox .nav:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .lightbox img {
+    max-width: 95vw;
+    max-height: 70vh;
+  }
+
+  .lightbox .nav {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .lightbox .close {
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+  }
+}
   </style>
 </head>
 
@@ -3110,6 +3224,17 @@ body.menu-open .scroll-top {
     </div>
 
   </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+
+  <span class="close" onclick="closeLightbox()">×</span>
+
+  <img id="lightbox-img">
+
+  <button class="nav prev" onclick="prevSlide()">❮</button>
+  <button class="nav next" onclick="nextSlide()">❯</button>
+
 </div>
 
 <footer class="footer">
@@ -4245,6 +4370,52 @@ function filterGallery(type) {
 // INIT
 window.addEventListener("load", updateGallery);
 window.addEventListener("resize", updateGallery);
+</script>
+
+<script>
+let currentIndex = 0;
+let galleryImages = [];
+
+function initGallery() {
+  galleryImages = Array.from(document.querySelectorAll(".gallery-item"));
+
+  galleryImages.forEach((img, index) => {
+    img.style.cursor = "pointer"; // biar keliatan bisa diklik
+
+    img.onclick = () => {
+      openLightbox(index);
+    };
+  });
+}
+
+function openLightbox(index) {
+  currentIndex = index;
+  document.getElementById("lightbox").style.display = "flex";
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
+
+function updateLightbox() {
+  document.getElementById("lightbox-img").src =
+    galleryImages[currentIndex].src;
+}
+
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % galleryImages.length;
+  updateLightbox();
+}
+
+function prevSlide() {
+  currentIndex =
+    (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+  updateLightbox();
+}
+
+/* 🔥 INIT PALING AMAN */
+document.addEventListener("DOMContentLoaded", initGallery);
 </script>
 
 <div class="popup" id="popup">
